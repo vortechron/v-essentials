@@ -1,6 +1,6 @@
-# The last laravel project scaffolding you will ever need
+# The last laravel frontend project scaffolding you will ever need
 
-Packed with must-have components to launch enterprise ready web application.
+Packed with must-have components to launch enterprise ready web application. Use vortechron/laravel-essentials composer package for backend.
 
 ## What you get?
 1. turbolinks
