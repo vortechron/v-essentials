@@ -1,0 +1,54 @@
+{
+  "name": "v-essentials",
+  "version": "1.0.27",
+  "description": "",
+  "main": "index.js",
+  "files": [
+    "src",
+    "scss"
+  ],
+  "scripts": {
+    "dev": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch-poll": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --watch-poll --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "hot": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "node node_modules/cross-env/src/bin/cross-env.js NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vortechron/v-scaff.git"
+  },
+  "keywords": [
+    "npm",
+    "scaffold",
+    "vortechron"
+  ],
+  "author": "vortechron",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vortechron/v-scaff/issues"
+  },
+  "homepage": "https://github.com/vortechron/v-scaff#readme",
+  "dependencies": {
+    "aos": "^2.3.4",
+    "bootstrap": "^4.4.1",
+    "bootstrap-vue": "^2.12.0",
+    "cross-env": "^7.0.2",
+    "droppable": "^2.2.0",
+    "fecha": "^4.2.0",
+    "laravel-mix": "^5.0.4",
+    "moment": "^2.24.0",
+    "node-sass": "^4.14.0",
+    "resolve-url-loader": "^3.1.0",
+    "sass-loader": "^8.0.2",
+    "turbolinks": "^5.2.0",
+    "v-money": "^0.8.1",
+    "vue-button-spinner": "^2.2.1",
+    "vue-ctk-date-time-picker": "^2.4.0",
+    "vue-form-generator": "^2.3.4",
+    "vue-multiselect": "^2.1.6",
+    "vue-template-compiler": "^2.6.11",
+    "vue-turbolinks": "^2.1.0",
+    "vue2-google-maps": "^0.10.7"
+  }
+}
