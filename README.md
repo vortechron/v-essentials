@@ -1,5 +1,12 @@
 # The last laravel project scaffolding you will ever need
 
+## Packed with must-have components to launch enterprise ready web application.
+
+### What you get?
+#### 1. turbolinks
+#### 2. vue components: datetimepicker, form-generator (cover all type of input), google-map, bootstrap, momentjs, v-money, animation-on-scroll
+#### 3. vue directives: v-post, v-submission
+
 1. Import Bootstrap css framework
 
 ```
