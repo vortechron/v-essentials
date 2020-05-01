@@ -124,12 +124,19 @@ $navbarHeight: 72px;
 $primary-100: theme-color-level('primary', -12);
 $primary-200: theme-color-level('primary', -11);
 
-$spacer: 1rem !default;
+$spacer: 0rem !default;
 $spacers: ();
-$spacers: map-merge((
-  6: ($spacer * 6),
-  7: ($spacer * 8)
-), $spacers);
+$spacers: map-merge(
+  (
+    0: 0,
+    1: .25,
+    2: .5,
+    3: .75,
+    4: 1,
+    5: 1.25
+  ),
+  $spacers
+);
 
 $sizes: () !default;
 $sizes: map-merge($sizes,(

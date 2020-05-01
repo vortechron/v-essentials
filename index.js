@@ -13,6 +13,15 @@ module.exports = {
     },
 
     install(Vue, options) {
+        window._ = require('lodash');
+
+        Vue.mixin({
+            computed: {
+              _() {
+                return _;
+              }
+            }
+          });
 
         if (options.hasVueDateTimePicker) {
             let VueCtkDateTimePicker = require('vue-ctk-date-time-picker');

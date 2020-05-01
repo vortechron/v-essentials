@@ -1,6 +1,11 @@
+// v-submission.spinner="[vfg]"
 Vue.directive('submission', {
     bind: function (el, binding, vnode) {
         const instance = vnode.context;
+
+        if (binding.modifiers.spinner) {
+          el.classList.add("has-spinner");
+        }
 
         let loader = (action) => {
             //start loading animation
@@ -22,9 +27,19 @@ Vue.directive('submission', {
             
             let statusError = true;
             binding.value.forEach((value) => {
-                instance.$refs[value].vfg().validate()
 
-                if (! instance.$refs[value].vfg().errors.length > 0) {
+                let comp = instance.$refs[value];
+                let name = comp.$options.name || comp.$options._componentTag
+                let vfg = null
+                if (name == 'formGenerator') {
+                  vfg = comp
+                  vfg.validate()
+                } else {
+                  vfg = instance.$refs[value].vfg()
+                  vfg.validate()
+                }
+
+                if (! vfg.errors.length > 0) {
                     statusError = false;
                 }
             })

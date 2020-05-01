@@ -9,7 +9,7 @@
         >
           <table class="min-w-full">
             <tbody class="bg-white">
-              <tr v-for="(file, index) in viewer" :key="index">
+              <tr v-for="(file, index) in viewer" :key="file.key">
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
@@ -46,8 +46,10 @@
       </div>
     </div>
     <div
+      v-show="schema.multiple || ((! schema.multiple) && viewer.length == 0)"
       :id="fieldId"
-      class="flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"
+      :class="[errors.length > 0 ? 'border-red-300' : 'border-gray-300']"
+      class="flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md"
     >
       <div class="text-center">
         <svg
@@ -75,7 +77,8 @@
             type="file"
             class="form-control-file hidden"
             :name="schema.inputName"
-            :multiple="schema.multiple ? schema.multiple : true"
+            :accept="schema.accept"
+            :multiple="!_.isNull(schema.multiple) ? schema.multiple : true"
             @change="fileChanged"
             placeholder
             aria-describedby="fileHelpId"
@@ -89,6 +92,13 @@
 
 <script>
 // need to npm install droppable
+
+// cssClasses: 'w-full',
+// inputName: 'fonts[]',
+// multiple: true,
+// accept: null ,
+// placeholder: 'Font File Only',
+// model: "files",
 
 import { abstractField } from "vue-form-generator";
 
@@ -123,6 +133,7 @@ export default {
             const ext = name.substring(lastDot + 1);
 
           this.viewer.push({
+            key: Math.random().toString(36).substring(7),
             filename,
             ext,
             file,
@@ -180,3 +191,13 @@ export default {
   }
 };
 </script>
+
+<style>
+.list-enter-active, .list-leave-active {
+  transition: all 1s;
+}
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+</style>
