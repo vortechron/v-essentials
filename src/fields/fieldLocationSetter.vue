@@ -14,9 +14,6 @@
              changed(data) {
                  this.value = data
              }
-         },
-         mounted() {
-             console.log('testset');
          }
    };
 </script>

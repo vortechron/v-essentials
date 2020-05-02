@@ -142,7 +142,6 @@ export default {
       geocoder.geocode({ location: position }, (results, status) => {
         if (status === "OK") {
           if (results[0]) {
-            console.log(results[0]);
             // new collect(comp).filter((item) => {return new collect(item.types).contains('country')}).first()
             this.address = results[0].formatted_address
           } else {
