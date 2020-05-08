@@ -1,5 +1,48 @@
 # The last laravel project scaffolding you will ever need
 
+This package heavily depends on tailwindcss ^1.0.0
+
+#### Installation
+
+Run:
+``` npm install v-essentials --save ``` 
+
+most requirement has been listed in package.json and auto import.
+
+except few things that need to manual install on your project:
+
+Then:
+
+##### 1. [tailwindcss](https://www.5balloons.info/getting-started-with-tailwindcss-on-laravel/)
+- tailwind.config.js
+```
+const defaultTheme = require('tailwindcss/defaultTheme')
+
+module.exports = {
+  important: "#app",
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
+    },
+  },
+  variants: {},
+  plugins: [
+    require('@tailwindcss/ui')
+  ],
+}
+```
+
+##### 2. [vortechron/laravel-essentials](https://github.com/vortechron/laravel-essentials)
+
+- generate countries to use vfg countries, state, phone number field 
+```
+php artisan essentials:generate-countries
+```
+
+## Usage
+
 #### 1. Import Bootstrap css framework (optional)
 
 ```
@@ -10,20 +53,20 @@ or you can import individually on your scss file
 #### 2. Import Vue Plugin
 
 ```
-import vScaff from 'v-scaff';
-Vue.use(vScaff, {
+import vEss from 'v-essentials';
+Vue.use(vEss, {
     hasBootstrapVue: true,
-    hasVueMultiselect: true,
-    hasVFG: true,
-    hasVueAutoRegister: true,
-    hasMoment: true,
-    hasVMoney: true,
-    hasAOS: true,
-    hasVueButtonSpinner: true,
-    hasDirectives: true,
-    hasVueGoogleMap: true,
-    vueGoogleMapKey: 'your-key',
-    hasVueCtkDateTimePicker: true,
+    hasVueMultiselect: true, // - req by vfg
+    hasVFG: true, // - req by vfg
+    hasVueAutoRegister: true, // - req by vfg
+    hasMoment: true, // - req by vfg
+    hasVMoney: true, // - req by vfg
+    hasAOS: true, 
+    hasVueButtonSpinner: true, // - req by directives
+    hasDirectives: true, 
+    hasVueGoogleMap: true, // - req by vfg
+    vueGoogleMapKey: 'your-key', // - req by vfg
+    hasVueCtkDateTimePicker: true, // - req by vfg [ctkdatetimepicker]
 });
 ```
 
@@ -76,7 +119,7 @@ v-submission="['vfg-ref']" : trigger validate method on vfg form and add loading
 - modal
 ```
 <button @click="$refs.modal.show()">Open Modal</button> 
-<modal ref="modal">
+<modal ref="modal" :has-cancel ok-label title="this is title" subtitle="this is subtitle" @ok="">
     Hello world
 </modal>
 ```
@@ -223,5 +266,21 @@ v-submission="['vfg-ref']" : trigger validate method on vfg form and add loading
 {
     type: "title",
     title: "Hi tq all"
+}
+```
+
+- phoneNumber
+```
+{
+    type: "phoneNumber",
+    inputType: "text",
+    inputName: "phone_number",
+    label: "Contact Number",
+    model: "phone_number",
+    checkUrl: "{{ route('verify.check') }}",
+    sendUrl: "{{ route('verify.send') }}",
+    verifyUrl: "{{ route('verify.code') }}",
+    required: true,
+    validator: ['required']
 }
 ```

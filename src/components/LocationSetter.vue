@@ -22,7 +22,7 @@
 
     <gmap-map
       :class="{'hidden': !showMap}"
-      class="border-2 border-dashed border-gray-300 border-solid pb-6 pt-5 px-6 rounded-md vue-map-container"
+      class="border border-solid"
       @click="setPlaceOnMapClick"
       :center="center"
       :zoom="12"

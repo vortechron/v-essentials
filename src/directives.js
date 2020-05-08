@@ -25,7 +25,7 @@ Vue.directive('submission', {
         el.addEventListener('click', (e) => {
             loader('start')
             
-            let statusError = true;
+            let statusError = false;
             binding.value.forEach((value) => {
 
                 let comp = instance.$refs[value];
@@ -39,8 +39,8 @@ Vue.directive('submission', {
                   vfg.validate()
                 }
 
-                if (! vfg.errors.length > 0) {
-                    statusError = false;
+                if (vfg.errors.length != 0) {
+                    statusError = true;
                 }
             })
             
@@ -49,7 +49,10 @@ Vue.directive('submission', {
             }
 
             setTimeout(() => {
-                loader('stop')
+              loader('stop')
+                $('html, body').animate({
+                  scrollTop: $('.error').offset().top - 200
+              }, 500);
             }, 1000)
 
         })

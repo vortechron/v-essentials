@@ -1,6 +1,8 @@
 window.Droppable = require('droppable').default;
+const _ = require('lodash');
 
 module.exports = {
+    
     turbolinksVue(vueClosure) {
         var Turbolinks = require("turbolinks");
         Turbolinks.start();
@@ -13,8 +15,6 @@ module.exports = {
     },
 
     install(Vue, options) {
-        window._ = require('lodash');
-
         Vue.mixin({
             computed: {
               _() {
@@ -56,7 +56,24 @@ module.exports = {
             const VueFormGenerator = require('vue-form-generator');
             require('vue-form-generator/dist/vfg.css');
             window.VueFormGenerator = VueFormGenerator
-            Vue.use(VueFormGenerator)
+            Vue.use(VueFormGenerator, {
+                validators: {
+                    requiredObject(value, field, model) {
+
+                        for (let key in value) {
+                            if (field.validatorSelector) {
+                                if (_.isNull(value[key]) && field.validatorSelector.includes(key)) return ['This field is required!']
+                                
+                                continue;
+                            }
+
+                            if ({}.hasOwnProperty.call(value, key) && _.isNull(value[key])) return ['This field is required!']
+                        }
+
+                        return []
+                    }
+                }
+            });
         }
 
         if (options.hasVueAutoRegister) {
@@ -86,7 +103,7 @@ module.exports = {
         }
 
         if (options.hasVueButtonSpinner) {
-            const VueButtonSpinner = require('vue-button-spinner');
+            const VueButtonSpinner = require('vue-button-spinner').default;
             Vue.component('ButtonSpinner', VueButtonSpinner);
         }
 

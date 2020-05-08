@@ -25,3 +25,15 @@
 // your components
 @import "user/user"; 
 
+.form-group.error input:not([type=checkbox]), .form-group.error select, .form-group.error textarea, .error .multiselect > .multiselect__tags {
+    border: 1px solid red !important;
+    background-color: rgba(255, 0, 0, 0.07) !important;
+}
+
+.form-group.error input.multiselect__input {
+    border: 0px solid #ffffff00 !important;
+}
+
+.multiselect__input, .multiselect__single {
+    background: transparent !important;
+}

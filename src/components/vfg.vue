@@ -12,7 +12,8 @@
     export default {
         props: {
             model: Object,
-            options: Object
+            options: Object,
+            isRow: Boolean
         },
         data() {
             return {
@@ -29,11 +30,14 @@
         },
         mounted() {
             var x = `
+            ${this.isRow ? '{ "groups": [' : ''}
             {
+                ${this.isRow ? '"styleClasses": "form-row",' : ''}
                 "fields": [
                     ${this.$slots.default[0].text}
                 ]
             }
+            ${this.isRow ? ']}' : ''}
             `;
             eval("this.schema =" + x);
 

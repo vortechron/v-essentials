@@ -1,52 +1,64 @@
-<!-- fieldAwesome.vue -->
-
 <template>
   <div :class="schema.cssClasses">
-    <div class="flex flex-col mb-4" v-if="viewer.length > 0">
+    <div class="flex flex-col mb-4" v-if="media && media.length > 0">
       <div class="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div
           class="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200"
         >
           <table class="min-w-full">
-            <tbody class="bg-white">
-              <tr v-for="(file, index) in viewer" :key="file.key">
+            <slide-y-down-transition group tag="tbody" :duration="600">
+              <tr v-for="(m, index) in media" :key="m.id">
                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
                       <img
-                        v-if="isImage(file.file)"
+                        v-if="isImage(m.mime_type)"
                         class="h-10 w-10 rounded"
-                        :src="file.result"
+                        :src="m.full_url"
                         alt
                       />
-                      <svg v-else fill="currentColor" viewBox="0 0 20 20" class="h-10"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd"></path></svg>
+                      <svg v-else fill="currentColor" viewBox="0 0 20 20" class="h-10">
+                        <path
+                          fill-rule="evenodd"
+                          d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
                     </div>
                     <div class="ml-4">
-                      <div class="text-sm leading-5 font-medium text-gray-900">{{ file.filename.substring(0, 20) }}</div>
-                      <div class="text-sm leading-5 text-gray-500">{{ file.ext }}</div>
+                      <input type="hidden" :name="`${schema.inputName}[media][${index}]`" v-model="m.id" />
+                      <div
+                        class="text-sm leading-5 font-medium text-gray-900"
+                      >{{ m.file_name }}</div>
+                      <div class="text-sm leading-5 text-gray-500">{{ m.mime_type }}</div>
                     </div>
                   </div>
-                </td>
-                <!-- <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-                  <span
-                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
-                  >Active</span> -->
                 </td>
 
                 <td
                   @click="removeMedia(index)"
                   class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium"
                 >
-                  <svg fill="currentColor" viewBox="0 0 20 20" class="focus:text-red-800 h-8 hover:text-red-500 transition w-8"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+                  <svg
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    class="focus:text-red-800 h-8 hover:text-red-500 transition w-8"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
                 </td>
               </tr>
-            </tbody>
+            </slide-y-down-transition>
           </table>
         </div>
       </div>
     </div>
     <div
-      v-show="schema.multiple || ((! schema.multiple) && viewer.length == 0)"
+      v-show="schema.multiple || ((! schema.multiple) && media && media.length == 0)"
       :id="fieldId"
       :class="[errors.length > 0 ? 'border-red-300' : 'border-gray-300']"
       class="flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md"
@@ -75,16 +87,17 @@
           <input
             :ref="fieldId + '-input'"
             type="file"
-            class="form-control-file hidden"
-            :name="schema.inputName"
+            class="hidden"
             :accept="schema.accept"
             :multiple="!_.isNull(schema.multiple) ? schema.multiple : true"
             @change="fileChanged"
-            placeholder
-            aria-describedby="fileHelpId"
           />
+
+          <input type="hidden" :name="`${schema.inputName}[key]`" v-model="key" />
         </p>
-        <p class="mt-1 text-xs text-gray-500">{{ schema.placeholder ? schema.placeholder : 'PNG, JPG, GIF up to 10MB'}}</p>
+        <p
+          class="mt-1 text-xs text-gray-500"
+        >{{ schema.placeholder ? schema.placeholder : 'PNG, JPG, GIF up to 10MB'}}</p>
       </div>
     </div>
   </div>
@@ -100,14 +113,20 @@
 // placeholder: 'Font File Only',
 // model: "files",
 
+import { forEach } from "lodash";
 import { abstractField } from "vue-form-generator";
+import { SlideYDownTransition } from "vue2-transitions";
 
 export default {
+  components: {
+    SlideYDownTransition
+  },
   mixins: [abstractField],
   data() {
     return {
-      viewer: []
-    }
+      key: null,
+      media: []
+    };
   },
   computed: {
     fieldId() {
@@ -115,85 +134,67 @@ export default {
     },
     fieldInputId() {
       return this.fieldId + "-input";
-    },
-  },
-  watch: {
-    value(data) {
-      this.viewer = [];
-      const dT = new DataTransfer();
-
-      data.forEach(file => {
-        let reader = new FileReader();
-        reader.onload = e => {
-
-            const name = file.name;
-            const lastDot = name.lastIndexOf('.');
-
-            const filename = name.substring(0, lastDot);
-            const ext = name.substring(lastDot + 1);
-
-          this.viewer.push({
-            key: Math.random().toString(36).substring(7),
-            filename,
-            ext,
-            file,
-            result: e.target.result
-          })
-        };
-
-        reader.readAsDataURL(file);
-
-        dT.items.add(file);
-      });
-
-      this.$refs[this.fieldInputId].files = dT.files;
     }
   },
   methods: {
     removeMedia(index) {
-      this.value.splice(index, 1)
-      this.viewer.splice(index, 1)
+      this.media.splice(index, 1);
+
+      this.value = this.media
     },
 
-    isImage(file) {
-      const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
-      let res = file && $.inArray(file['type'], acceptedImageTypes)
+    isImage(mimeType) {
+      const acceptedImageTypes = ["image/gif", "image/jpeg", "image/png"];
 
-      return res == 1
+      return acceptedImageTypes.includes(mimeType);
+    },
+
+    uploadMedia(files) {
+      var formData = new FormData();
+
+      formData.append(`key`, this.key);
+      forEach(files, (file, index) => {
+        formData.append(`media[]`, file);
+      });
+
+      const axiosConfig = {
+        onUploadProgress: progressEvent => console.log(progressEvent.loaded),
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      };
+      axios
+        .post(this.schema.uploadUrl || "/media-upload", formData, axiosConfig)
+        .then(response => {
+          this.media.push(...response.data.media)
+          this.value = this.media
+        });
     },
 
     fileChanged(event) {
-      this.value = Array.from(event.target.files);
-      //   let reader = new FileReader();
-      //   reader.onload = e => {
-      //     this.value = e.target.result;
-      //   };
-
-      //   if (event.target.files && event.target.files.length > 0) {
-      //     reader.readAsDataURL(event.target.files[0]);
-      //   }
+      this.uploadMedia(event.target.files);
     }
   },
   mounted() {
+    this.key = Math.floor(Math.random() * 100) + "-" + Date.now();
+
+    this.media = this.value
+
     const droppable = new Droppable({
       element: document.querySelector("#" + this.fieldId),
       isClickable: false
     });
 
     droppable.onFilesDropped(files => {
-      const dT = new DataTransfer();
-      files.map(item => {
-        dT.items.add(item);
-      });
-      this.$refs[this.fieldInputId].files = dT.files;
-      this.value = files;
+      this.uploadMedia(files);
     });
   }
 };
 </script>
 
 <style>
-.list-enter-active, .list-leave-active {
+.list-enter-active,
+.list-leave-active {
   transition: all 1s;
 }
 .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
