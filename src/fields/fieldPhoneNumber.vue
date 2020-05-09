@@ -14,9 +14,8 @@
                     <template slot="singleLabel" slot-scope="props">
                         <div class="flex items-center">
                             <img
-                                class="h-4 pr-3"
+                                class="h-4 pr-3 hidden sm:block"
                                 :src="props.option.flag"
-                                alt="No Man’s Sky"
                             />
                             <span class="option__title">
                                 +{{ props.option.calling_code }}
@@ -50,7 +49,7 @@
                             id="phone"
                             :name="`${schema.inputName}[number]`"
                             placeholder
-                            class="block duration-150 ease-in-out form-input rounded-l-md rounded-none sm:leading-5 sm:text-sm transition w-full"
+                            class="block duration-150 ease-in-out form-input rounded-l-md rounded-none sm:leading-5 text-sm transition w-full"
                             :class="{
                                 'rounded-r-md':
                                     isVerified || !value.number || !value.code
@@ -82,7 +81,7 @@
                     </div>
                     <slide-x-left-transition>
                         <button-spinner
-                            v-show="!isVerified && value.number && value.code && schema.mustVerified"
+                            v-show="! isVerified && schema.mustVerified"
                             @click.native="send"
                             :is-loading="isLoading" 
                             :disabled="isLoading"
@@ -219,18 +218,22 @@ export default {
                     this.status = true
                 });
         },
-        check: _.debounce(function() {
-          if (this.value.code && this.value.number)
-            axios.post(this.schema.checkUrl, this.value).then(response => {
-                this.isVerified = response.data.status;
-            });
+        check() {
+          if (this.value.code && this.value.number) {
+              axios.post(this.schema.checkUrl, this.value).then(response => {
+                  this.isVerified = response.data.status;
+              });
+          }
+        },
+        debounceCheck: _.debounce(function() {
+           this.check()
         }, 500)
     },
     watch: {
         code(value) {
             if (value) {
                 this.value.code = value.calling_code;
-                this.check();
+                this.debounceCheck();
             } else {
                 this.value.code = null;
             }
@@ -241,7 +244,7 @@ export default {
             if (value) {
                 this.value.number = value;
 
-                this.check();
+                this.debounceCheck();
             } else this.value.number = null;
 
             this.triggerValidate()

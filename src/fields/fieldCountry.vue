@@ -11,7 +11,7 @@
             <template slot="singleLabel" slot-scope="props">
                 <div class="flex items-center">
                     <img
-                        class="h-4 pr-3"
+                        class="h-4 pr-3 hidden sm:block"
                         :src="props.option.flag"
                     />
                     <span class="option__title">
