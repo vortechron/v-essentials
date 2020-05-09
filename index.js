@@ -15,6 +15,7 @@ module.exports = {
     },
 
     install(Vue, options) {
+
         Vue.mixin({
             computed: {
               _() {

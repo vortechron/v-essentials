@@ -51,6 +51,8 @@
     "vue-turbolinks": "^2.1.0",
     "vue2-google-maps": "^0.10.7",
     "@stripe/stripe-js": "^1.5.0",
-    "vue2-transitions": "^0.3.0"
+    "vue2-transitions": "^0.3.0",
+    "@vue-hero-icons/outline": "^1.2.0",
+    "@vue-hero-icons/solid": "^1.2.0"
   }
 }
