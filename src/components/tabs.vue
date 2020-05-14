@@ -1,11 +1,12 @@
 <template>
     <div>
-        <span class="relative z-0 flex flex-wrap shadow-sm mt-5">
+        <span class="relative z-0 flex flex-wrap mt-5">
             <button
                 v-for="(tab, index) in tabs"
                 :key="tab.title"
                 @click="selectTab(index)"
                 :class="{
+                    'bg-gray-400': index == selectedIndex,
                     'bg-white': index != selectedIndex,
                     'rounded-l-md': index == 0,
                     '-ml-px': index != 0,

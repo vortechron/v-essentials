@@ -1,27 +1,58 @@
 window.Droppable = require('droppable').default;
 const _ = require('lodash');
+window.enablePageChangeWarn = true;
+
 
 module.exports = {
     
     turbolinksVue(vueClosure) {
+
+        $(document).on("turbolinks:before-visit", function() {
+            if (window.enablePageChangeWarn) {
+                return confirm("Are you sure?");
+            }
+        });
+        
+        $(document).on("turbolinks:load", function() {
+            window.enablePageChangeWarn = false
+        });
+
         var Turbolinks = require("turbolinks");
         Turbolinks.start();
         Turbolinks.setProgressBarDelay(0);
 
-        const TurbolinksAdapter = require('vue-turbolinks');
+        // enable for blood flickering sacrifice
+        const TurbolinksAdapter = require('vue-turbolinks').default;
         Vue.use(TurbolinksAdapter);
 
         document.addEventListener('turbolinks:load', vueClosure);
     },
 
     install(Vue, options) {
-        Vue.mixin({
-            computed: {
-              _() {
-                return _;
-              }
-            }
-          });
+        const pace = require('./src/pace')
+
+        window.enablePageChangeWarn = false
+        window.onload = function() {
+            window.addEventListener("beforeunload", function (e) {
+
+                if (! window.enablePageChangeWarn) {
+                    return undefined;
+                }
+        
+                var confirmationMessage = 'It looks like you have been editing something. '
+                                        + 'If you leave before saving, your changes will be lost.';
+        
+                (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+                return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+            });
+        };
+
+        pace.start()
+
+        require('./src/mixins')
+
+        var Editor = require('@tinymce/tinymce-vue').default;
+        Vue.component('Editor', Editor);
 
         if (options.hasVueDateTimePicker) {
             let VueCtkDateTimePicker = require('vue-ctk-date-time-picker');

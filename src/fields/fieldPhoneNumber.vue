@@ -1,6 +1,6 @@
 <!-- fieldAwesome.vue -->
 <template>
-    <div class="w-full">
+    <div class="w-full phone-number">
         <div class="flex -mx-1">
             <div class="w-1/4 px-1">
                 <multiselect
@@ -274,21 +274,21 @@ export default {
 </script>
 
 <style>
-.multiselect__tags {
+.phone-number .multiselect__tags {
     min-height: 38px !important;
     padding: 8px 40px 0 8px !important;
 }
 
-.multiselect__content-wrapper {
+.phone-number .multiselect__content-wrapper {
     min-width: 500px;
 }
 
-.multiselect__single {
+.phone-number .multiselect__single {
     padding-left: 5px;
     margin-bottom: 8px;
 }
 
-.multiselect__placeholder {
+.phone-number .multiselect__placeholder {
     margin-bottom: 5px !important;
 }
 </style>

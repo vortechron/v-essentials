@@ -3,16 +3,6 @@
     v-show="computedShow"
     class="z-50 fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center"
   >
-    <!--
-            Background overlay, show/hide based on modal state.
-
-            Entering: "ease-out duration-300"
-            From: "opacity-0"
-            To: "opacity-100"
-            Leaving: "ease-in duration-200"
-            From: "opacity-100"
-            To: "opacity-0"
-    -->
     <transition
       name="background"
       enter-class="opacity-0"
@@ -27,16 +17,6 @@
       </div>
     </transition>
 
-    <!--
-            Modal panel, show/hide based on modal state.
-
-            Entering: "ease-out duration-300"
-            From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            To: "opacity-100 translate-y-0 sm:scale-100"
-            Leaving: "ease-in duration-200"
-            From: "opacity-100 translate-y-0 sm:scale-100"
-            To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-    -->
     <transition
       name="modal"
       enter-active-class="ease-out duration-300"
@@ -58,7 +38,7 @@
             <slot name="header"></slot>
           </div>
           <div class="text-center sm:mt-5">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">{{ title || 'Title' }}</h3>
+            <h3 v-if="title" class="text-lg leading-6 font-medium text-gray-900">{{ title || 'Title' }}</h3>
             <div class="mt-2" v-if="subtitle">
               <p class="text-sm leading-5 text-gray-500">{{ subtitle || 'Subtitle' }}</p>
             </div>
@@ -129,10 +109,8 @@ export default {
       setTimeout(() => {
         this.computedShow = false;
       }, 500);
-    },
-    hasSlot(name = "default") {
-      return !!this.$slots[name] || !!this.$scopedSlots[name];
     }
+    
   }
 };
 </script>

@@ -8,6 +8,8 @@
                 </span>
             </div>
         </div>
+
+        <input type="hidden" :name="schema.inputName" v-model="value">
     </div>
 </template>
 

@@ -27,7 +27,6 @@ export default {
 				};
 			}
 		},
-
 		wrappedValue: {
 			get() {
 				if (this.value && this.value.indexOf("data") === 0) return "<inline base64 image>";

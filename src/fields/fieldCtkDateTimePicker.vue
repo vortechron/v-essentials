@@ -1,7 +1,7 @@
 <!-- fieldAwesome.vue -->
 <template>
     <div :class="schema.cssClasses ? schema.cssClasses: {'w-full': true}">
-        <vue-ctk-date-time-picker v-model="value"/>
+        <vue-ctk-date-time-picker v-model="value" format="YYYY-MM-DD HH:mm:ss"/>
         <input type="hidden" :name="schema.inputName" v-model="value">
     </div>
 </template>
@@ -15,9 +15,6 @@
              changed(data) {
                  this.value = data
              }
-         },
-         mounted() {
-             console.log('testset');
          }
    };
 </script>

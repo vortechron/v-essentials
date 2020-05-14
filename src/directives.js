@@ -1,17 +1,17 @@
+import ClickOutside from 'vue-click-outside'
+
 // v-submission.spinner="[vfg]"
 Vue.directive('submission', {
     bind: function (el, binding, vnode) {
         const instance = vnode.context;
 
-        if (binding.modifiers.spinner) {
-          el.classList.add("has-spinner");
-        }
+        if (binding.modifiers.spinner) el.classList.add("has-spinner");
 
         let loader = (action) => {
             //start loading animation
         if (action == 'start') {
             $(el).attr('data-btn-text', $(el).text());
-            $(el).html('<span class="spinner"><i class="fa fa-spinner fa-spin"></i></span> '+ $(el).attr('data-btn-text'));
+            $(el).html('<span class="spinner"><i class="fa fa-spinner fa-spin"></i></span> &nbsp;'+ $(el).attr('data-btn-text'));
             $(el).addClass('active');
           }
 
@@ -24,24 +24,24 @@ Vue.directive('submission', {
 
         el.addEventListener('click', (e) => {
             loader('start')
-            
+
             let statusError = false;
             binding.value.forEach((value) => {
 
-                let comp = instance.$refs[value];
-                let name = comp.$options.name || comp.$options._componentTag
-                let vfg = null
-                if (name == 'formGenerator') {
-                  vfg = comp
-                  vfg.validate()
-                } else {
-                  vfg = instance.$refs[value].vfg()
-                  vfg.validate()
-                }
+              let comp = typeof value == 'object' ? value : instance.$refs[value];
+              if (! comp.$options) return;
+              
+              let name = comp.$options.name || comp.$options._componentTag
+              let vfg = null
 
-                if (vfg.errors.length != 0) {
-                    statusError = true;
-                }
+                if (name == 'vfgRepeater') vfg = comp
+                else if (name == 'vfg') vfg = comp.vfg() 
+                else if (name == 'formGenerator') vfg = comp
+                else vfg = instance.$refs[value].vfg()
+
+                vfg.validate()
+
+                if (vfg.errors.length != 0) statusError = true;
             })
             
             if (statusError) {
@@ -62,7 +62,8 @@ Vue.directive('submission', {
 Vue.directive('post', {
     bind: function (el, binding, vnode) {
 
-      var id = Math.random().toString(36).substring(7);
+      var text = $(el).html()
+      var id = Math.random().toString(36).substring(7)
       var route = binding.value;
       var attrib = `event.preventDefault();document.getElementById(\'${id}\').submit();`;
 
@@ -75,6 +76,8 @@ Vue.directive('post', {
       var form = `<form id="${id}" action="${route}" method="POST" style="display: none;">
       <input type="hidden" name="_token" value="${document.head.querySelector('meta[name="csrf-token"]').content}">
         </form>`
-      el.innerHTML = el.textContent + form;
+      el.innerHTML = text + form;
     }
 })
+
+Vue.directive('ClickOutside', ClickOutside)
