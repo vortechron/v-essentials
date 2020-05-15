@@ -1,0 +1,65 @@
+.multiselect__tags, .form-control, .date-time-picker input {
+    @apply border-gray-300 #{!important};
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  }
+  
+  .date-time-picker .time-picker button {
+    @apply border-transparent #{!important};
+    background-color: transparent !important;
+  }
+  
+  .multiselect__placeholder {
+    margin-bottom: 7px #{!important};
+  }
+  
+  .tw-table {
+    @apply align-middle rounded-b-sm inline-block min-w-full shadow overflow-x-auto border-b border-gray-200  #{!important};
+  }
+  
+  .tw-table table {
+    @apply min-w-full #{!important};
+  }
+  
+  .tw-table th {
+    @apply px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider #{!important};
+  }
+  
+  .tw-table td {
+    @apply px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-600;
+  }
+  
+  .is-bulkable tr td:first-child {
+    @apply pl-6 pr-0 #{!important};
+  }
+  
+  .is-actionable tr td:last-child {
+    @apply px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium #{!important};
+  }
+  
+  .is-actionable tr th:last-child {
+    @apply px-6 py-3 border-b border-gray-200 bg-gray-50 #{!important};
+  }
+  
+  .spinner {
+    display: inline-block;
+    opacity: 0;
+    width: 0;
+    -webkit-transition: opacity 0.25s, width 0.25s;
+    -moz-transition: opacity 0.25s, width 0.25s;
+    -o-transition: opacity 0.25s, width 0.25s;
+    transition: opacity 0.25s, width 0.25s;
+  }
+  
+  .has-spinner.active {
+    cursor: progress;
+  }
+  
+  .has-spinner.active .spinner {
+    opacity: 1;
+    width: auto;
+  }
+  
+  .has-spinner.btn.active .spinner {
+    min-width: 20px;
+  }
