@@ -53,7 +53,8 @@
     "@stripe/stripe-js": "^1.5.0",
     "vue2-transitions": "^0.3.0",
     "vue-click-outside": "^1.1.0",
-    "@tailwindcss/ui": "^0.3.0",
-    "@tinymce/tinymce-vue": "^3.2.1"
+    "@tinymce/tinymce-vue": "^3.2.1",
+    "@vue-hero-icons/solid": "^1.2.0",
+    "@vue-hero-icons/outline": "^1.2.0"
   }
 }
