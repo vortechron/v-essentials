@@ -36,7 +36,9 @@ export default {
 
     computed: {
         states() {
-            let res = _.find(window.countries, ["code", this.model.address.country]);
+            let address = this.model.address ? this.model.address.country : null
+            
+            let res = _.find(window.countries, ["code", address || this.model.country]);
             
             this.state = this.value
 

@@ -11,13 +11,14 @@
             Cancel
         </a>
         <button 
-         v-show="modelData.state == 'edit'"
+         v-show="modelData.state == 'edit' && !noDelete"
             @click.prevent="$emit('delete')"
             class="mr-2 inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-white bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red active:bg-red-700 transition ease-in-out duration-150"
         >
             Delete
         </button>
-        <button @click="avoidWarn"
+        <button @click="atSave"
+         v-show="!noSaveAndClose"
             v-submission.spinner="refs"
             type="submit" 
             name="_redirect" value="false"
@@ -25,7 +26,8 @@
         >
             Save & Close
         </button>
-        <button @click="avoidWarn"
+        <button @click="atSave"
+            :id="saveId"
             v-submission.spinner="refs"
             type="submit" 
              name="_redirect" value="true"
@@ -40,6 +42,19 @@
 export default {
     props: {
         data: Object,
+        noDelete: {
+            type: Boolean,
+            default: false
+        },
+        noSaveAndClose: {
+            type: Boolean,
+            default: false
+        },
+        saveId: String,
+        isPreventDefault: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
         return {
@@ -48,8 +63,17 @@ export default {
         }
     },
     methods: {
-        avoidWarn() {
-            window.enablePageChangeWarn = true
+        atSave(e) {
+            this.avoidWarn()
+
+            if (this.isPreventDefault) {
+                e.preventDefault()
+            }
+
+            this.$emit('save', e)
+        },
+        avoidWarn(e) {
+            window.enablePageChangeWarn = false
         },
         walkAParent(parent, callback) {
             callback(parent)

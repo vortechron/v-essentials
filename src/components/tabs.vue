@@ -1,6 +1,11 @@
 <template>
     <div>
-        <span class="relative z-0 flex flex-wrap mt-5">
+        <tab-nav class="mb-4" :col="tabs.length">
+            <tab-nav-button v-for="(tab, index) in tabs" :key="tab.title" :title="tab.title" :is-active="index == selectedIndex" @click.native="selectTab(index)"></tab-nav-button>
+        </tab-nav>
+
+        <slot name="middle"></slot>
+        <!-- <span class="relative z-0 flex flex-wrap mt-5">
             <button
                 v-for="(tab, index) in tabs"
                 :key="tab.title"
@@ -18,7 +23,7 @@
                 <vnodes v-if="tab.$slots.icon" :vnodes="tab.$slots.icon[0]"/>
                 {{ tab.title }}
             </button>
-        </span>
+        </span> -->
         <slot></slot>
     </div>
 </template>
@@ -32,18 +37,25 @@ export default {
             render: (h, ctx) => ctx.props.vnodes
         }
     },
-    props: {},
+    props: {
+        initialIndex: Number,
+        selectIndex: {
+            type: Number,
+            default: 0
+        }
+    },
     data() {
         return {
-            selectedIndex: 0, // the index of the selected tab,
+            selectedIndex: this.selectIndex, // the index of the selected tab,
             tabs: [] // all of the tabs
         };
     },
-    created() {
-        this.tabs = this.$children;
-    },
     mounted() {
-        this.selectTab(0);
+        this.$children.forEach((item) => {
+            if (item.$options._componentTag == 'tab' || item.$options._componentTag == 'tab-blank') this.tabs.push(item)
+        })
+
+        this.selectTab(this.initialIndex || 0);
     },
     methods: {
         selectTab(i) {

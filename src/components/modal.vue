@@ -28,7 +28,8 @@
     >
       <div
         v-if="isShow"
-        class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6"
+        class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:w-full sm:p-6"
+        :class="`max-w-${maxWidth}`"
       >
         <div>
           <div
@@ -70,7 +71,7 @@
               @click="hide()"
               type="button"
               class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline transition ease-in-out duration-150 sm:text-sm sm:leading-5"
-            >Cancel</button>
+            >{{ cancelLabel || 'Cancel' }}</button>
           </span>
         </div>
       </div>
@@ -81,6 +82,10 @@
 <script>
 export default {
   props: {
+    maxWidth: {
+      type: String,
+      default: 'lg'
+    },
     hasCancel: {
       type: Boolean,
       default: true
@@ -90,6 +95,7 @@ export default {
       default: false
     },
     okLabel: String,
+    cancelLabel: String,
     title: String,
     subtitle: String,
   },

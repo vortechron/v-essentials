@@ -42,7 +42,7 @@ Vue.mixin({
             return this.model[collections].map((item) => item[pluck])
         },
         vueMultiselectCustomLabel(collections, key = 'name', pluck = 'id') {
-            return (opt) => {
+          return (opt) => {
                 return this.model[collections].find(function (item) { return item[pluck] == opt; })[key];
             }
         },

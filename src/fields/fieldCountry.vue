@@ -69,7 +69,11 @@ export default {
     },
     mounted() {
         this.schema.onChanged = () => {
-            this.model.address.state = null
+            if (this.model.address) {
+                this.model.address.state = null
+            } else {
+                this.model.state = null
+            }
         }
     }
 };

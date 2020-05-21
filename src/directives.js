@@ -49,11 +49,13 @@ Vue.directive('submission', {
             }
 
             setTimeout(() => {
-              loader('stop')
-                $('html, body').animate({
-                  scrollTop: $('.error').offset().top - 200
+              $('html, body').animate({
+                scrollTop: $('.error').offset().top - 200
               }, 500);
-            }, 1000)
+            }, 500)
+            setTimeout(() => {
+              loader('stop')
+            }, 3000)
 
         })
     }

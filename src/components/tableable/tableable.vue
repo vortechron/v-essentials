@@ -1,7 +1,18 @@
 <template>
-    <div @click="tableClicked">
-        <slot></slot>
+    <div>
+        <div @click="tableClicked" v-if="dataItems.length != 0">
+            <slot></slot>
+        </div>
+        <div v-else class="flex items-center justify-center">
+            <div class="py-1/5 text-center">
+                <span class="material-icons-two-tone text-6xl">inbox</span> 
+                <div class="font-semibold text-gray-500 tracking-tight">
+                Nothing to show yet
+                </div>
+            </div>
+        </div>
     </div>
+
 </template>
 
 <script>

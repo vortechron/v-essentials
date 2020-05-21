@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white overflow-hidden shadow-md rounded-sm">
+    <div class="bg-white shadow-md rounded-sm">
         <div class="bg-white px-4 py-3 border-b border-gray-200 sm:px-6" v-if="title || hasSlot('title')">
             <div
                 class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-no-wrap"
@@ -18,6 +18,7 @@
                 <div class="ml-4 mt-4 flex-shrink-0" v-if="actionLabel">
                     <span class="inline-flex rounded-md shadow-sm">
                         <a
+                            @click="$emit('action')"
                             :href="actionUrl"
                             class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700"
                         >

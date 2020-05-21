@@ -1,9 +1,7 @@
 <template>
-    <card v-show="isActive" :title="title">
-        <template v-slot:content>
-            <slot></slot>
-        </template>
-    </card>
+    <div v-show="isActive">
+        <slot></slot>
+    </div>
 </template>
 
 <script>

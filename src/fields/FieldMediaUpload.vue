@@ -42,7 +42,7 @@
                   <svg
                     fill="currentColor"
                     viewBox="0 0 20 20"
-                    class="focus:text-red-800 h-8 hover:text-red-500 transition w-8"
+                    class="focus:text-red-800 h-8 hover:text-red-500 transition w-8 float-right"
                   >
                     <path
                       fill-rule="evenodd"
@@ -57,49 +57,16 @@
         </div>
       </div>
     </div>
-    <div
-      v-show="schema.multiple || ((! schema.multiple) && media && media.length == 0)"
-      :id="fieldId"
-      :class="[errors.length > 0 ? 'border-red-300' : 'border-gray-300']"
-      class="flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md"
-    >
-      <div class="text-center">
-        <svg
-          class="mx-auto h-12 w-12 text-gray-400"
-          stroke="currentColor"
-          fill="none"
-          viewBox="0 0 48 48"
-        >
-          <path
-            d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-        <p class="mt-1 text-sm text-gray-600">
-          <button
-            @click="$refs[fieldInputId].click()"
-            type="button"
-            class="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out"
-          >Upload a file</button>
-          or drag and drop
-          <input
-            :ref="fieldId + '-input'"
-            type="file"
-            class="hidden"
-            :accept="schema.accept"
-            :multiple="!_.isNull(schema.multiple) ? schema.multiple : true"
-            @change="fileChanged"
-          />
-
-          <input type="hidden" :name="`${schema.inputName}[key]`" v-model="key" />
-        </p>
-        <p
-          class="mt-1 text-xs text-gray-500"
-        >{{ schema.placeholder ? schema.placeholder : 'PNG, JPG, GIF up to 10MB'}}</p>
-      </div>
-    </div>
+    <input type="hidden" :name="`${schema.inputName}[key]`" v-model="key" />
+    <media-upload 
+    :id="fieldId" 
+    :show="schema.multiple || ((! schema.multiple) && media && media.length == 0)" 
+    :has-error="errors.length > 0"
+    :accept="schema.accept"
+    :placeholder="schema.placeholder"
+    :multiple="schema.multiple"
+    @change="fileChanged"
+    @dropped="dropped"></media-upload>
   </div>
 </template>
 
@@ -131,9 +98,6 @@ export default {
   computed: {
     fieldId() {
       return this.getFieldID(this.schema);
-    },
-    fieldInputId() {
-      return this.fieldId + "-input";
     }
   },
   methods: {
@@ -173,21 +137,15 @@ export default {
 
     fileChanged(event) {
       this.uploadMedia(event.target.files);
+    },
+    dropped(files) {
+      this.uploadMedia(files);
     }
   },
   mounted() {
     this.key = Math.floor(Math.random() * 100) + "-" + Date.now();
 
-    this.media = this.value
-
-    const droppable = new Droppable({
-      element: document.querySelector("#" + this.fieldId),
-      isClickable: false
-    });
-
-    droppable.onFilesDropped(files => {
-      this.uploadMedia(files);
-    });
+    this.media = this.value ? this.value : []
   }
 };
 </script>

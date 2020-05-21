@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
+        <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow" v-if="hasSearch">
             <button
                 @click="sidebarOpen = true"
                 class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
@@ -156,7 +156,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+    props: {
+        hasSearch: Boolean
+    }
+};
 </script>
 
 <style></style>

@@ -2,15 +2,23 @@
 export default {
   props: {
     populateData: Object,
+    populateMethods: Object,
+    atMounted: {
+      type: Function,
+      default: () => {}
+    },
   },
   data() {
     return {
       data: this.populateData
     };
   },
-  computed: {
-    console: () => console,
-    window: () => window
+  mounted() {
+    _.each(this.populateMethods || {}, (method, key) => {
+      this[key] = method
+    })
+
+    this.atMounted()
   }
 };
 </script>

@@ -15,9 +15,9 @@ export default {
         loadStripe(this.schema.publicKey)
             .then((stripe) => {
                  const elements = stripe.elements();
-        const cardElement = elements.create("card");
+                const cardElement = elements.create("card");
 
-        cardElement.mount("#card-element");
+                cardElement.mount("#card-element");
             })
 
        

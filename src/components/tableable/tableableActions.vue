@@ -1,7 +1,7 @@
 <template>
     <form ref="form" class="flex justify-between flex-wrap">
         <div class="inline-flex">
-            <div class="relative inline-flex shadow-sm mr-2">
+            <div class="relative inline-flex shadow-sm mr-2" v-if="hasBulk">
                 <span
                     class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white"
                 >
@@ -72,7 +72,8 @@
 <script>
 export default {
     props: {
-        sort: Array
+        sort: Array,
+        hasBulk: Boolean
     },
     data() {
         return {

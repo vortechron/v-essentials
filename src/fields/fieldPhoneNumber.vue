@@ -42,7 +42,7 @@
                 </multiselect>
             </div>
             <div class="w-3/4 px-1">
-                <div class="flex rounded-md shadow-sm">
+                <div class="flex rounded-md">
                     <div class="relative flex-grow focus-within:z-10">
                         <input
                             v-model="number"
@@ -219,7 +219,7 @@ export default {
                 });
         },
         check() {
-          if (this.value.code && this.value.number) {
+          if (this.value.code && this.value.number && this.schema.mustVerified) {
               axios.post(this.schema.checkUrl, this.value).then(response => {
                   this.isVerified = response.data.status;
               });
