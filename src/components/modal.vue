@@ -80,7 +80,10 @@
 </template>
 
 <script>
+import visi from 'v-essentials/src/mixins/hasVisibility'
+
 export default {
+  mixins: [visi],
   props: {
     maxWidth: {
       type: String,
@@ -99,25 +102,6 @@ export default {
     title: String,
     subtitle: String,
   },
-  data() {
-    return {
-      isShow: false,
-      computedShow: false
-    };
-  },
-  methods: {
-    show() {
-      this.computedShow = true;
-      this.isShow = true;
-    },
-    hide() {
-      this.isShow = false;
-      setTimeout(() => {
-        this.computedShow = false;
-      }, 500);
-    }
-    
-  }
 };
 </script>
 

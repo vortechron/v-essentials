@@ -3,6 +3,8 @@ import ClickOutside from 'vue-click-outside'
 // v-submission.spinner="[vfg]"
 Vue.directive('submission', {
     bind: function (el, binding, vnode) {
+        console.log(el, binding, vnode, this);
+
         const instance = vnode.context;
 
         if (binding.modifiers.spinner) el.classList.add("has-spinner");

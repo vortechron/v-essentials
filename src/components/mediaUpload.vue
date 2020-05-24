@@ -1,6 +1,6 @@
 <template>
   <div
-      v-show="show"
+      v-if="isShow"
       :id="id"
       :class="[hasError ? 'border-red-300' : 'border-gray-300']"
       class="flex justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md"
@@ -50,7 +50,7 @@ export default {
         accept: String,
         placeholder: String,
         name: String,
-        show: {
+        isShow: {
             type: Boolean,
             default: true
         },

@@ -58,6 +58,7 @@ export default {
                     "duration-150"
                 ],
                 onlyActive: [
+                    "is-active",
                     "text-gray-900",
                     "bg-gray-100",
                     "hover:bg-gray-100",

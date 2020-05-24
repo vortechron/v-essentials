@@ -19,12 +19,6 @@
 
 <script>
 export default {
-    components: {
-        Vnodes: {
-            functional: true,
-            render: (h, ctx) => ctx.props.node
-        }
-    },
     data() {
         return {
             items: []

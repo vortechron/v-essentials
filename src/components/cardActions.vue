@@ -17,7 +17,7 @@
         >
             Delete
         </button>
-        <button @click="atSave"
+        <button @click="save"
          v-show="!noSaveAndClose"
             v-submission.spinner="refs"
             type="submit" 
@@ -26,7 +26,7 @@
         >
             Save & Close
         </button>
-        <button @click="atSave"
+        <button @click="save"
             :id="saveId"
             v-submission.spinner="refs"
             type="submit" 
@@ -63,7 +63,7 @@ export default {
         }
     },
     methods: {
-        atSave(e) {
+        save(e) {
             this.avoidWarn()
 
             if (this.isPreventDefault) {

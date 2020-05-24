@@ -60,7 +60,7 @@
     <input type="hidden" :name="`${schema.inputName}[key]`" v-model="key" />
     <media-upload 
     :id="fieldId" 
-    :show="schema.multiple || ((! schema.multiple) && media && media.length == 0)" 
+    :is-show="schema.multiple || ((! schema.multiple) && media && media.length == 0)" 
     :has-error="errors.length > 0"
     :accept="schema.accept"
     :placeholder="schema.placeholder"

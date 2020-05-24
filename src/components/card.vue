@@ -28,7 +28,7 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white px-4 py-3 border-b border-gray-200 sm:px-6" v-if="hasMiddleSection">
+        <div class="bg-white px-4 py-3 border-b border-gray-200 sm:px-6" v-if="hasSlot('middle')">
             <slot name="middle"></slot>
         </div>
         <div class="px-4 py-5 sm:p-6 bg-gray-100" v-if="hasSlot('content')">
@@ -48,7 +48,6 @@ export default {
         subtitle: String,
         actionLabel: String,
         actionUrl: String,
-        hasMiddleSection: Boolean,
         noAction: Boolean
     }
 };

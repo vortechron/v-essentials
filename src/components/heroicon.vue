@@ -6,7 +6,10 @@
 export default {
     props: {
         name: String,
-        solid: Boolean,
+        solid: {
+            type: Boolean,
+            default: true
+        },
         outline: Boolean
     },
     data() {

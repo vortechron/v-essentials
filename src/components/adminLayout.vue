@@ -1,8 +1,17 @@
 <template>
     <div>
-        <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow" v-if="hasSearch">
+        <sidebar class="sidebar-text-white" ref="sidebar">
+            <div class="px-2">
+                <vnodes v-for="node in $slots.nav" :node="node"></vnodes>
+            </div>
+        </sidebar>
+
+        <div
+            class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow"
+            v-if="hasSearch"
+        >
             <button
-                @click="sidebarOpen = true"
+                @click="$refs.sidebar.show()"
                 class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
                 aria-label="Open sidebar"
             >
@@ -21,39 +30,13 @@
                 </svg>
             </button>
             <div class="flex-1 px-4 flex justify-between">
-                <div class="flex-1 flex">
-                    <div class="w-full flex md:ml-0">
-                        <label for="search_field" class="sr-only">Search</label>
-                        <div
-                            class="relative w-full text-gray-400 focus-within:text-gray-600"
-                        >
-                            <div
-                                class="absolute inset-y-0 left-0 flex items-center pointer-events-none"
-                            >
-                                <svg
-                                    class="h-5 w-5"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        clip-rule="evenodd"
-                                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                    ></path>
-                                </svg>
-                            </div>
-                            <input
-                                id="search_field"
-                                class="block w-full h-full pl-8 pr-3 py-2 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 sm:text-sm"
-                                placeholder="Search"
-                                type="search"
-                            />
-                        </div>
-                    </div>
-                </div>
+                <search-bar :endpoint="searchEndpoint"></search-bar>
                 <div class="ml-4 flex items-center md:ml-6">
+                    <div class="relative mt-1">
+
                     <button
-                        class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500"
+                        @click="notiShow = !notiShow"
+                        class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500 "
                         aria-label="Notifications"
                     >
                         <svg
@@ -71,15 +54,19 @@
                         </svg>
                     </button>
 
+                    <dropdown :is-show="notiShow">
+                        <dropdown-button>asdas</dropdown-button>
+                    </dropdown>
+                    </div>
+
                     <!-- Profile dropdown -->
                     <div
-                        @click.away="open = false"
                         class="ml-3 relative"
-                        x-data="{ open: false }"
                     >
                         <div>
                             <button
-                                @click="open = !open"
+                                v-click-outside="function () { profileShow = false }"
+                                @click="profileShow = !profileShow"
                                 class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:shadow-outline"
                                 id="user-menu"
                                 aria-label="User menu"
@@ -94,51 +81,32 @@
                                 />
                             </button>
                         </div>
-                        <div
-                            x-show="open"
-                            x-description="Profile dropdown panel, show/hide based on dropdown state."
-                            x-transition:enter="transition ease-out duration-100"
-                            x-transition:enter-start="transform opacity-0 scale-95"
-                            x-transition:enter-end="transform opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-75"
-                            x-transition:leave-start="transform opacity-100 scale-100"
-                            x-transition:leave-end="transform opacity-0 scale-95"
-                            class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
-                            style="display: none;"
-                        >
-                            <div
-                                class="py-1 rounded-md bg-white shadow-xs"
-                                role="menu"
-                                aria-orientation="vertical"
-                                aria-labelledby="user-menu"
+
+                        <dropdown :is-show="profileShow">
+                            <a
+                                href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
+                                role="menuitem"
+                                >Your Profile</a
                             >
-                                <a
-                                    href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                                    role="menuitem"
-                                    >Your Profile</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                                    role="menuitem"
-                                    >Settings</a
-                                >
-                                <a
-                                    href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                                    role="menuitem"
-                                    >Sign out</a
-                                >
-                            </div>
-                        </div>
+                            <a
+                                href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
+                                role="menuitem"
+                                >Settings</a
+                            >
+                            <a
+                                href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
+                                role="menuitem"
+                                >Sign out</a
+                            >
+                        </dropdown>
                     </div>
                 </div>
             </div>
         </div>
-        <div
-            class="container max-w-screen-xl mx-auto min-h-screen py-8"
-        >
+        <div class="container max-w-screen-xl mx-auto min-h-screen py-8">
             <div class="grid grid-cols-12 gap-6">
                 <div class="col-span-3 hidden md:block">
                     <nav>
@@ -158,7 +126,14 @@
 <script>
 export default {
     props: {
-        hasSearch: Boolean
+        hasSearch: Boolean,
+        searchEndpoint: String
+    },
+    data() {
+        return {
+            profileShow: false,
+            notiShow: false,
+        }
     }
 };
 </script>
