@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="flex items-center" :class="[isCenter ? 'justify-center' : '']">
-            <icon-pack :name="icon"></icon-pack>
-            <span class="ml-1 font-semibold text-sm">{{ title }}</span>
+            <icon-pack :name="icon" v-if="icon" class="mr-1"></icon-pack>
+            <span class="font-semibold text-sm">{{ title }}</span>
         </div>
 
         <div class="text-xs mt-1">

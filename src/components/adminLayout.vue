@@ -8,7 +8,6 @@
 
         <div
             class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow"
-            v-if="hasSearch"
         >
             <button
                 @click="$refs.sidebar.show()"
@@ -29,8 +28,8 @@
                     ></path>
                 </svg>
             </button>
-            <div class="flex-1 px-4 flex justify-between">
-                <search-bar :endpoint="searchEndpoint"></search-bar>
+            <div class="flex-1 px-4 flex" :class="[hasSearch ? 'justify-between' : 'justify-end']">
+                <search-bar :endpoint="searchEndpoint" v-if="hasSearch"></search-bar>
                 <div class="ml-4 flex items-center md:ml-6">
                     <div class="relative mt-1">
 

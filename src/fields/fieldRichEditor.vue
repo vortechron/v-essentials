@@ -1,7 +1,7 @@
 <!-- fieldAwesome.vue -->
 <template>
     <div class="w-full">
-        <editor v-model="value" :init="{plugins: 'wordcount', width: '100%', height: schema.height || 200}" class="rounded-sm"/>
+        <editor v-model="value" :init="{plugins: 'wordcount', width: '100%', height: schema.height || 200, force_br_newlines: true }" class="rounded-sm"/>
         <input type="hidden" :name="schema.inputName" v-model="value">
     </div>
 </template>

@@ -55,6 +55,7 @@
     "vue-click-outside": "^1.1.0",
     "@tinymce/tinymce-vue": "^3.2.1",
     "@vue-hero-icons/solid": "^1.2.0",
-    "@vue-hero-icons/outline": "^1.2.0"
+    "@vue-hero-icons/outline": "^1.2.0",
+    "vue-spinner": "^1.0.3"
   }
 }

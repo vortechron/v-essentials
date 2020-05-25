@@ -3,21 +3,21 @@ import ClickOutside from 'vue-click-outside'
 // v-submission.spinner="[vfg]"
 Vue.directive('submission', {
     bind: function (el, binding, vnode) {
-        console.log(el, binding, vnode, this);
-
         const instance = vnode.context;
 
-        if (binding.modifiers.spinner) el.classList.add("has-spinner");
+        if (binding.modifiers.spinner) {
+          let firstChild = el.firstElementChild
+          if (firstChild) el = firstChild
+          el.classList.add("has-spinner");
+        }
 
         let loader = (action) => {
-            //start loading animation
         if (action == 'start') {
             $(el).attr('data-btn-text', $(el).text());
             $(el).html('<span class="spinner"><i class="fa fa-spinner fa-spin"></i></span> &nbsp;'+ $(el).attr('data-btn-text'));
             $(el).addClass('active');
           }
 
-          //stop loading animation
           if (action == 'stop') {
             $(el).html($(el).attr('data-btn-text'));
             $(el).removeClass('active');
@@ -39,11 +39,12 @@ Vue.directive('submission', {
                 if (name == 'vfgRepeater') vfg = comp
                 else if (name == 'vfg') vfg = comp.vfg() 
                 else if (name == 'formGenerator') vfg = comp
-                else vfg = instance.$refs[value].vfg()
 
-                vfg.validate()
-
-                if (vfg.errors.length != 0) statusError = true;
+                if (vfg) {
+                  vfg.validate()
+  
+                  if (vfg.errors.length != 0) statusError = true;
+                }
             })
             
             if (statusError) {

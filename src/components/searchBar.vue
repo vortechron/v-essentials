@@ -27,7 +27,7 @@
                     type="search"
                     name="q"
                     :value="value"
-                    @input="$emit('input', $event.targe.value)"
+                    @input="$emit('input', $event.target.value)"
                     @enter="$refs.searchform.submit()"
                 />
             </div>

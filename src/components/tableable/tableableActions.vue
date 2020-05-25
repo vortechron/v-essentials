@@ -60,13 +60,15 @@
                 </transition>
             </div>
 
-            <filter-button @change="$refs.form.submit()">
+            <filter-action @change="$refs.form.submit()">
                 <slot name="filter"></slot>
-            </filter-button>
+            </filter-action>
         </div>
 
         <div class="ml-2">
-            <sort-button :sort="sort" @change="$refs.form.submit()" class="float-right"></sort-button>
+            <sort-action class="float-right">
+                <slot name="sort"></slot>
+            </sort-action>
         </div>
     </form>
 </template>
@@ -74,7 +76,6 @@
 <script>
 export default {
     props: {
-        sort: Array,
         hasBulk: Boolean
     },
     data() {

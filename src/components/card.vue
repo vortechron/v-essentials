@@ -16,15 +16,14 @@
                     </p>
                 </div>
                 <div class="ml-4 mt-4 flex-shrink-0" v-if="actionLabel">
-                    <span class="inline-flex rounded-md shadow-sm">
-                        <a
-                            @click="$emit('action')"
-                            :href="actionUrl"
-                            class="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700"
-                        >
-                            {{ actionLabel }}
-                        </a>
-                    </span>
+                    <btn
+                        size="md"
+                        @click="$emit('action')"
+                        :href="actionUrl"
+                    >
+                        {{ actionLabel }}
+                    </btn>
+                    
                 </div>
             </div>
         </div>
