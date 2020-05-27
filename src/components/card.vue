@@ -18,7 +18,7 @@
                 <div class="ml-4 mt-4 flex-shrink-0" v-if="actionLabel">
                     <btn
                         size="md"
-                        @click="$emit('action')"
+                        @click.native="$emit('action')"
                         :href="actionUrl"
                     >
                         {{ actionLabel }}
