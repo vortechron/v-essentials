@@ -82,24 +82,7 @@
                         </div>
 
                         <dropdown :is-show="profileShow">
-                            <a
-                                href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                                role="menuitem"
-                                >Your Profile</a
-                            >
-                            <a
-                                href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                                role="menuitem"
-                                >Settings</a
-                            >
-                            <a
-                                href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                                role="menuitem"
-                                >Sign out</a
-                            >
+                            <slot name="profile"></slot>
                         </dropdown>
                     </div>
                 </div>

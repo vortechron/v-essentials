@@ -85,7 +85,6 @@ module.exports = {
 
         if (options.hasVFG) {
             const VueFormGenerator = require('vue-form-generator');
-            require('vue-form-generator/dist/vfg.css');
             window.VueFormGenerator = VueFormGenerator
             Vue.use(VueFormGenerator, {
                 validators: {

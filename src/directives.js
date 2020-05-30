@@ -31,7 +31,7 @@ Vue.directive('submission', {
             binding.value.forEach((value) => {
 
               let comp = typeof value == 'object' ? value : instance.$refs[value];
-              if (! comp.$options) return;
+              if (! comp || ! comp.$options) return;
               
               let name = comp.$options.name || comp.$options._componentTag
               let vfg = null

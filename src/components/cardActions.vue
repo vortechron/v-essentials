@@ -34,7 +34,7 @@
             type="submit" 
              name="_redirect" value="true"
         >
-            Save
+            {{ saveLabel || 'Save' }}
         </btn>
     </div>
 </template>
@@ -55,7 +55,8 @@ export default {
         isPreventDefault: {
             type: Boolean,
             default: false
-        }
+        },
+        saveLabel: String
     },
     data() {
         return {

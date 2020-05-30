@@ -5,7 +5,7 @@
                 class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-no-wrap"
             >
                 <div class="ml-4 mt-4">
-                    <h3 class="text-normal leading-6 font-medium text-gray-900">
+                    <h3 class="text-normal leading-6 font-medium text-gray-900 flex">
                         <slot name="title">{{ title }}</slot>
                     </h3>
                     <p
@@ -18,12 +18,12 @@
                 <div class="ml-4 mt-4 flex-shrink-0" v-if="actionLabel">
                     <btn
                         size="md"
+                        :color="actionColor"
                         @click.native="$emit('action')"
                         :href="actionUrl"
                     >
                         {{ actionLabel }}
                     </btn>
-                    
                 </div>
             </div>
         </div>
@@ -47,6 +47,10 @@ export default {
         subtitle: String,
         actionLabel: String,
         actionUrl: String,
+        actionColor: {
+            type: String,
+            default: 'indigo'
+        },
         noAction: Boolean
     }
 };

@@ -17,6 +17,9 @@ Vue.mixin({
         $logs() {
             return console.log;
         },
+        $document() {
+            return document;
+        },
         $window() {
             return window;
         },
@@ -25,6 +28,24 @@ Vue.mixin({
         }
     },
     methods: {
+        validateAndSubmit(vfgs, form) {
+            let statusError = false;
+            vfgs.forEach((vfg) => {
+                let name = vfg.$options.name || vfg.$options._componentTag
+                if (name == 'vfg') vfg = vfg.vfg() 
+
+                vfg.validate()
+                if (vfg.errors.length != 0) statusError = true;
+            })
+            
+            if (! statusError) form.submit()
+
+            setTimeout(() => {
+            $('html, body').animate({
+                scrollTop: $('.error').offset().top - 200
+            }, 500);
+            }, 500)
+        },
         getMeta(metaName) {
             const metas = document.getElementsByTagName("meta");
 

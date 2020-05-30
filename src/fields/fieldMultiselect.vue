@@ -3,7 +3,7 @@
         	<multiselect
 		:id="selectOptions.id"
 		:options="options"
-		:value="value"
+		v-model="value"
 		:multiple="selectOptions.multiple"
 		:track-by="selectOptions.trackBy || null"
 		:label="selectOptions.label || null"
@@ -86,7 +86,9 @@ export default {
 	},
 	methods: {
 		updateSelected(value /* , id*/) {
-			this.value = value;
+			this.$nextTick(() => {
+				this.value = value;
+			})
 		},
 		addTag(newTag, id) {
 			let onNewTag = this.selectOptions.onNewTag;
