@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <button v-if="typeof schema.showAddButton === 'undefined' ? true : schema.showAddButton" @click.prevent="value.push({})" class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 text-xs leading-4 font-medium rounded text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">
+        <button :id="schema.addId || 'repeater-add-button'" v-if="typeof schema.showAddButton === 'undefined' ? true : schema.showAddButton" @click.prevent="value.push({})" class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 text-xs leading-4 font-medium rounded text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">
             {{ schema.addLabel || 'Add' }}
         </button>
     </div>

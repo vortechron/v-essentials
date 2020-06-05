@@ -1,6 +1,6 @@
 <!-- fieldAwesome.vue -->
 <template>
-    <div class="border mb-3 mt-4 w-full">
+    <div class="border w-full" :class="schema.length || 'mb-3 mt-4'">
     </div>
 </template>
 

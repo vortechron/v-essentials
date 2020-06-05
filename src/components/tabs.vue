@@ -1,9 +1,15 @@
 <template>
     <div>
-        <tab-nav class="mb-4" :col="tabs.length">
+        
+        <tab-nav class="mb-4 hidden sm:block" :col="tabs.length">
             <tab-nav-button v-for="(tab, index) in tabs" :key="tab.title" :title="tab.title" :is-active="index == selectedIndex" @click.native="selectTab(index)"></tab-nav-button>
         </tab-nav>
-
+<div class="mb-4 sm:hidden">
+            <select aria-label="Selected tab" class="form-select block w-full" @change="selectTab($event.target.value)">
+                <option v-for="(tabS, indexS) in tabs" :key="tabS.title" :value="indexS" :selected="indexS == selectedIndex">{{ tabS.title }}
+                </option>
+            </select>
+        </div>
         <slot name="middle"></slot>
 
         <slot></slot>
@@ -34,8 +40,10 @@ export default {
             this.selectedIndex = i;
 
             this.tabs.forEach((tab, index) => {
-                tab.isActive = index === i;
+                tab.isActive = index === parseInt(i);
             });
+
+            this.$emit('tab-change', i)
         }
     }
 };

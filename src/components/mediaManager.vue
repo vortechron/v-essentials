@@ -22,13 +22,13 @@
             cancel-label="Close"
             style="z-index: 1040;"
             :is-ok-loading="selectedIndex == -1"
-            @ok="$emit('select', media[selectedIndex]); $refs.modal.hide()"
+            @ok="$emit('select', mediaOnSelect); $refs.modal.hide()"
         >
-            <tabs ref="tabs">
+            <tabs ref="tabs" @tab-change="selectedIndex = -1; selectedTabIndex = $event">
                 <tab-blank title="Uploaded Image" class="flex">
 
                     <card 
-                    class="h-60 overflow-y-auto overflow-x-hidden w-full"
+                    class="bg-white h-screen overflow-x-hidden overflow-y-auto rounded-sm shadow-md sm:h-60 w-full"
                     >
                         <pulse-loader :loading="isLoading" color="#5850ec" class="py-1/6"></pulse-loader>
                         <div class="flex items-center flex-wrap">
@@ -63,11 +63,27 @@
                 </tab-blank>
                 <tab-blank title="Import from Instagram">
                     <card class="p-2">
-                        <a :href="instagramAuthUrl" class="inline-flex rounded-md shadow-sm">
+                        <a target="_blank" :href="instagramAuthUrl" class="inline-flex rounded-md shadow-sm">
                             <button type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150">
                                 {{ igMedia.length > 0 ? 'Re-import' : 'Link with Instagram' }} 
                             </button>
                         </a>
+
+                        <pulse-loader :loading="isLoading" color="#5850ec" class="py-1/6"></pulse-loader>
+                        <div class="flex items-center flex-wrap">
+                            <div
+                                :id="`media${index}`"
+                                @click="toggleSelectMedia(index)"
+                                :class="[
+                                    selectedIndex == index ? 'bg-blue-200' : '',
+                                ]"
+                                class="w-1/2 sm:w-1/3 p-4 h-full cursor-pointer duration-500 ease-in-out hover:-translate-y-1 hover:scale-110 hover:shadow-lg transform transition-all" v-for="(m, index) in igMedia" :key="m.id">
+                                <img
+                                    :src="m.full_url"
+                                    alt="media-manager-image"
+                                />
+                            </div>
+                        </div>
                     </card>
                 </tab-blank>
             </tabs>
@@ -90,6 +106,7 @@ export default {
     },
     data() {
         return {
+            selectedTabIndex: 0, 
             selectedIndex: -1, 
             media: [],
             igMedia: [],
@@ -157,6 +174,16 @@ export default {
                 //     document.getElementById(`media${index}`).scrollIntoView();
                 // }, 500)
             }
+        }
+    },
+    computed: {
+        mediaOnSelect() {
+            if (this.selectedTabIndex == 2) {
+                console.log('test');
+                return this.igMedia[this.selectedIndex]
+            }
+
+            return this.media[this.selectedIndex]
         }
     },
     mounted() {

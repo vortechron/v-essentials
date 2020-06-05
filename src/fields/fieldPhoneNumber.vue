@@ -261,12 +261,21 @@ export default {
             });
         }
     },
-    mounted() {
+    created() {
 
         this.schema.validatorSelector = ['code', 'number'];
 
-        this.code = _.find(this.countries, ["calling_code", this.value.code]);
-        this.number = this.value.number;
+        if (! this.value) {
+            this.value = {
+                code: '',
+                number: '',
+                isVerified: false
+            }
+        } else {
+            this.code = _.find(this.countries, ["calling_code", this.value.code]);
+            this.number = this.value.number;
+        }
+
 
         this.check();
     }

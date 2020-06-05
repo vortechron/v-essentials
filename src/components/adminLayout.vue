@@ -8,6 +8,7 @@
 
         <div
             class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow"
+            v-if="!noNavbar"
         >
             <button
                 @click="$refs.sidebar.show()"
@@ -108,6 +109,7 @@
 <script>
 export default {
     props: {
+        noNavbar: Boolean,
         hasSearch: Boolean,
         searchEndpoint: String
     },

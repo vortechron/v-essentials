@@ -28,7 +28,7 @@
     >
       <div
         v-if="isShow"
-        class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:w-full sm:p-6"
+        class="bg-white rounded-lg px-4 pt-5 pb-4 overflow-y-auto h-screen sm:h-auto shadow-xl transform transition-all sm:w-full sm:p-6"
         :class="`max-w-${maxWidth}`"
       >
         <div>
@@ -104,6 +104,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
