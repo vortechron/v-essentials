@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="computedShow"
-    class="z-50 fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center"
+    class="z-50 fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center overflow-y-auto"
   >
     <transition
       name="background"
