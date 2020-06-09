@@ -35,6 +35,7 @@
                     <div class="relative mt-1">
 
                     <button
+                        v-if="!noNotification"
                         @click="notiShow = !notiShow"
                         class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500 "
                         aria-label="Notifications"
@@ -113,7 +114,8 @@ export default {
     props: {
         noNavbar: Boolean,
         hasSearch: Boolean,
-        searchEndpoint: String
+        searchEndpoint: String,
+        noNotification: Boolean
     },
     data() {
         return {
