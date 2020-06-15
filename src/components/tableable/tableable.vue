@@ -93,6 +93,8 @@ export default {
             }
         },
         tableClicked() {
+            if (! this.motherCheckbox) return
+            
             this.syncCheckboxes()
         },
         syncItemsWithIndexes(indexes) {
