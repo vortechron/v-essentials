@@ -35,7 +35,7 @@
                         </div>
                         <div class="ml-4 flex-shrink-0 flex">
                             <button
-                                @click="$emit('close')"
+                                @click.prevent="$emit('close')"
                                 class="inline-flex text-gray-400 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150"
                             >
                                 <svg

@@ -15,15 +15,18 @@
                         {{ subtitle }}
                     </p>
                 </div>
-                <div class="ml-4 mt-4 flex-shrink-0" v-if="actionLabel">
-                    <btn
-                        size="md"
-                        :color="actionColor"
-                        @click.native="$emit('action')"
-                        :href="actionUrl"
-                    >
-                        {{ actionLabel }}
-                    </btn>
+                <div class="ml-4 mt-4 flex-shrink-0">
+                    <slot name="action">
+                        <btn
+                            v-if="actionLabel"
+                            size="md"
+                            :color="actionColor"
+                            @click.native="$emit('action')"
+                            :href="actionUrl"
+                        >
+                            {{ actionLabel }}
+                        </btn>
+                    </slot>
                 </div>
             </div>
         </div>

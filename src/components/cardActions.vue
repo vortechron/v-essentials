@@ -3,39 +3,41 @@
         class="px-4 py-3 flex-1 flex justify-between sm:justify-end border-t border-gray-200 sm:px-6"
         v-if="modelData"
     >
-        <btn
-            theme="white"
-            v-if="modelData.backAction"
-            :href="modelData.backAction"
-            class="mr-2"
-        >
-            Cancel
-        </btn>
-        <btn 
-            color="red"
-         v-show="modelData.state == 'edit' && !noDelete"
-            @click.prevent.native="$emit('delete')"
-            class="mr-2"
-        >
-            Delete
-        </btn>
-        <btn @click.native="save"
-            v-show="!noSaveAndClose"
-            v-submission.spinner="refs"
-            type="submit" 
-            name="_redirect" value="false"
-            class="mr-2"
-        >
-            Save & Close
-        </btn>
-        <btn @click.native="save"
-            :id="saveId"
-            v-submission.spinner="refs"
-            type="submit" 
-             name="_redirect" value="true"
-        >
-            {{ saveLabel || 'Save' }}
-        </btn>
+        <slot>
+            <btn
+                theme="white"
+                v-if="modelData.backAction"
+                :href="modelData.backAction"
+                class="mr-2"
+            >
+                Cancel
+            </btn>
+            <btn 
+                color="red"
+            v-show="modelData.state == 'edit' && !noDelete"
+                @click.prevent.native="$emit('delete')"
+                class="mr-2"
+            >
+                {{ deleteLabel || 'Delete' }}
+            </btn>
+            <btn @click.native="save"
+                v-show="!noSaveAndClose"
+                v-submission.spinner="refs"
+                type="submit" 
+                name="_redirect" value="false"
+                class="mr-2"
+            >
+                {{ saveAndCloseLabel || 'Save & Close' }}
+            </btn>
+            <btn @click.native="save"
+                :id="saveId"
+                v-submission.spinner="refs"
+                type="submit" 
+                name="_redirect" value="true"
+            >
+                {{ saveLabel || 'Save' }}
+            </btn>
+        </slot>
     </div>
 </template>
 
@@ -56,7 +58,9 @@ export default {
             type: Boolean,
             default: false
         },
-        saveLabel: String
+        deleteLabel: String,
+        saveLabel: String,
+        saveAndCloseLabel: String
     },
     data() {
         return {
