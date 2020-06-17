@@ -65,11 +65,12 @@ Vue.mixin({
         hasSlot(name = "default") {
             return !!this.$slots[name] || !!this.$scopedSlots[name];
         },
-        warnBeforeSubmit(ref, label) {
+        warnBeforeSubmit(ref, label = "Are you sure?") {
             window.enablePageChangeWarn = false;
 
-            if (confirm("Are you sure?")) {
-                if (ref && ref.nodeType) ref.submit();
+            if (confirm(label)) {
+                if (typeof ref === "function") ref();
+                else if (ref && ref.nodeType) ref.submit();
                 else this.$refs[ref].submit();
             } else {
                 window.enablePageChangeWarn = true;
