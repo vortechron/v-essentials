@@ -85,6 +85,16 @@ Vue.mixin({
                 })[key];
             };
         },
+        vueMultiselectValuesByCollections(collections, pluck = "id") {
+            return collections.map(item => item[pluck]);
+        },
+        vueMultiselectCustomLabelByCollections(collections, key = "name", pluck = "id") {
+            return opt => {
+                return collections.find(function(item) {
+                    return item[pluck] == opt;
+                })[key];
+            };
+        },
         formatBytes(bytes, decimals = 2) {
             if (bytes === 0) return "0 Bytes";
 
