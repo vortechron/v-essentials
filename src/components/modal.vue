@@ -91,7 +91,7 @@ export default {
     },
     hasCancel: {
       type: Boolean,
-      default: true
+      default: false
     },
     isOkLoading: {
       type: Boolean,
