@@ -1,7 +1,7 @@
 <!-- fieldAwesome.vue -->
 <template>
   <div :class="schema.cssClasses" class="w-full">
-    <div v-for="(row, parentIndex) in renderedRow" :key="row" class="flex -mx-2 text-center justify-between">
+    <div v-for="(row, parentIndex) in renderedRow" :key="row" class="flex flex-col md:flex-row -mx-2 text-center justify-between">
       <div
         @click="value = option.value"
         v-for="(option, index) in schema.options.slice(schema.column * parentIndex, (schema.column * (parentIndex + 1)))"

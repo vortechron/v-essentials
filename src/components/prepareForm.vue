@@ -17,7 +17,14 @@ export default {
             modelData: null
         }
     },
-
+    watch: {
+        data: {
+            deep: true,
+            handler(data) {
+                this.modelData = data
+            }
+        }
+    },
     mounted() {
         this.token = this.getMeta('csrf-token')
 

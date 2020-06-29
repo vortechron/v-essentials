@@ -31,6 +31,12 @@ export default {
         }
     },
     watch: {
+        items: {
+            deep: true,
+            handler(data) {
+                this.dataItems = data
+            }
+        },
         motherCheckbox(value) {
         }
     },

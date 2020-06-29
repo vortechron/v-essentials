@@ -91,7 +91,7 @@ export default {
 			})
 		},
 		addTag(newTag, id) {
-			let onNewTag = this.selectOptions.onNewTag;
+			let onNewTag = this.selectOptions.onNewTag.bind(this);
 			if (typeof onNewTag == "function") {
 				onNewTag(newTag, id, this.options, this.value);
 			}

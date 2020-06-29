@@ -46,16 +46,16 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="flex-shrink-0 flex items-center px-4">
+                    <div class="flex-shrink-0 flex items-center px-4 mb-5" v-if="logo">
                         <slot name="logo">
                             <img
                             class="h-8 w-auto"
-                            src="/img/logos/workflow-logo-on-dark.svg"
-                            alt="Workflow"
+                            :src="logo"
+                            alt="logo"
                             />
                         </slot>
                     </div>
-                    <div class="mt-5 flex-1 h-0 overflow-y-auto">
+                    <div class="flex-1 h-0 overflow-y-auto">
                         <slot></slot>
                     </div>
                 </div>
@@ -72,6 +72,9 @@ import visi from 'v-essentials/src/mixins/hasVisibility'
 
 export default {
   mixins: [visi],
+  props: {
+      logo: String
+  }
 };
 </script>
 

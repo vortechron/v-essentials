@@ -1,7 +1,7 @@
 <template>
   <div
     v-show="computedShow"
-    class="z-50 fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center overflow-y-auto"
+    class="z-50 fixed bottom-0 inset-x-0 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center overflow-y-auto"
   >
     <transition
       name="background"
@@ -91,7 +91,7 @@ export default {
     },
     hasCancel: {
       type: Boolean,
-      default: false
+      default: true
     },
     isOkLoading: {
       type: Boolean,

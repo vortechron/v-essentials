@@ -2,7 +2,6 @@ window.Droppable = require('droppable').default;
 const _ = require('lodash');
 window.enablePageChangeWarn = true;
 
-
 module.exports = {
     
     turbolinksVue(vueClosure) {
@@ -71,21 +70,20 @@ module.exports = {
         }
 
         if (options.hasBootstrapVue) {
-            const { BootstrapVue, IconsPlugin } = require('bootstrap-vue');
+            const { BootstrapVue, IconsPlugin } = require('bootstrap-vue')
             require('bootstrap-vue/dist/bootstrap-vue.css');
             Vue.use(BootstrapVue)
             Vue.use(IconsPlugin)
         }
 
         if (options.hasVueMultiselect) {
+            const Multiselect = require('vue-multiselect').default
             require('vue-multiselect/dist/vue-multiselect.min.css');
-            const Multiselect = require('vue-multiselect').default;
             Vue.component('multiselect', Multiselect)
         }
 
         if (options.hasVFG) {
-            const VueFormGenerator = require('vue-form-generator');
-            window.VueFormGenerator = VueFormGenerator
+            window.VueFormGenerator = require('vue-form-generator')
             Vue.use(VueFormGenerator, {
                 validators: {
                     requiredObject(value, field, model) {
@@ -104,6 +102,9 @@ module.exports = {
                     }
                 }
             });
+            // import('vue-form-generator')
+            // .then((VueFormGenerator) => {
+            // })
         }
 
         if (options.hasVueAutoRegister) {
@@ -112,7 +113,11 @@ module.exports = {
         }
 
         if (options.hasMoment) {
-            window.moment = require('moment');
+            window.moment = require('moment/min/moment.min')
+            // import('moment')
+            // .then((moment) => {
+            //     window.moment = moment
+            // })
         }
 
         if (options.hasVMoney) {

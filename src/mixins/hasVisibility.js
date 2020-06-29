@@ -14,7 +14,7 @@ export default {
             this.isShow = false;
             setTimeout(() => {
                 this.computedShow = false;
-            }, 500);
+            }, 700);
         }
     }
 };

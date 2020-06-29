@@ -1,6 +1,6 @@
 <template>
     <div>
-        <sidebar class="sidebar-text-white" ref="sidebar">
+        <sidebar :logo="logo" class="sidebar-text-white" ref="sidebar">
             <div class="px-2">
                 <vnodes v-for="node in $slots.nav" :node="node"></vnodes>
             </div>
@@ -66,7 +66,6 @@
                     >
                         <div>
                             <button
-                                v-click-outside="function () { profileShow = false }"
                                 @click="profileShow = !profileShow"
                                 class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:shadow-outline"
                                 id="user-menu"
@@ -115,7 +114,8 @@ export default {
         noNavbar: Boolean,
         hasSearch: Boolean,
         searchEndpoint: String,
-        noNotification: Boolean
+        noNotification: Boolean,
+        logo: String
     },
     data() {
         return {
