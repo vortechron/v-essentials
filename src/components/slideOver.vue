@@ -1,5 +1,5 @@
 <template>
-    <div v-show="computedShow" class="fixed inset-0 overflow-hidden z-10">
+    <div v-show="computedShow" class="fixed inset-0 overflow-hidden z-10 slide-over">
         <div class="absolute inset-0 overflow-hidden">
             <section class="absolute inset-y-0 pl-0 sm:pl-16 max-w-full right-0 flex">
                 <transition

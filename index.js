@@ -3,32 +3,10 @@ const _ = require('lodash');
 window.enablePageChangeWarn = true;
 
 module.exports = {
-    
-    turbolinksVue(vueClosure) {
-
-        $(document).on("turbolinks:before-visit", function() {
-            if (window.enablePageChangeWarn) {
-                return confirm("Are you sure?");
-            }
-        });
-        
-        $(document).on("turbolinks:load", function() {
-            window.enablePageChangeWarn = false
-        });
-
-        var Turbolinks = require("turbolinks");
-        Turbolinks.start();
-        Turbolinks.setProgressBarDelay(0);
-
-        // enable for blood flickering sacrifice
-        const TurbolinksAdapter = require('vue-turbolinks').default;
-        Vue.use(TurbolinksAdapter);
-
-        document.addEventListener('turbolinks:load', vueClosure);
-    },
 
     install(Vue, options) {
         const pace = require('./src/pace')
+        pace.start()
 
         window.enablePageChangeWarn = false
         window.onload = function() {
@@ -46,108 +24,15 @@ module.exports = {
             });
         };
 
-        pace.start()
-
-        require('./src/mixins')
-
-        var Editor = require('@tinymce/tinymce-vue').default;
-        Vue.component('Editor', Editor);
-
-        if (options.hasVueDateTimePicker) {
-            let VueCtkDateTimePicker = require('vue-ctk-date-time-picker');
-            require('vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css');
-            Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker);
+        if (options.hasMixins) {
+            require('./src/mixins')
         }
 
-        if (options.hasVueGoogleMap) {
-            let VueGoogleMaps = require("vue2-google-maps");
-            Vue.use(VueGoogleMaps, {
-            load: {
-                key: options.vueGoogleMapKey,
-                libraries: "places,geometry" // necessary for places input
-            }
-            });
-        }
-
-        if (options.hasBootstrapVue) {
-            const { BootstrapVue, IconsPlugin } = require('bootstrap-vue')
-            require('bootstrap-vue/dist/bootstrap-vue.css');
-            Vue.use(BootstrapVue)
-            Vue.use(IconsPlugin)
-        }
-
-        if (options.hasVueMultiselect) {
-            const Multiselect = require('vue-multiselect').default
-            require('vue-multiselect/dist/vue-multiselect.min.css');
-            Vue.component('multiselect', Multiselect)
-        }
-
-        if (options.hasVFG) {
-            window.VueFormGenerator = require('vue-form-generator')
-            Vue.use(VueFormGenerator, {
-                validators: {
-                    requiredObject(value, field, model) {
-
-                        for (let key in value) {
-                            if (field.validatorSelector) {
-                                if (_.isNull(value[key]) && field.validatorSelector.includes(key)) return ['This field is required!']
-                                
-                                continue;
-                            }
-
-                            if ({}.hasOwnProperty.call(value, key) && _.isNull(value[key])) return ['This field is required!']
-                        }
-
-                        return []
-                    }
-                }
-            });
-            // import('vue-form-generator')
-            // .then((VueFormGenerator) => {
-            // })
-        }
-
-        if (options.hasVueAutoRegister) {
+        if (options.hasAutoRegister) {
             const files = require.context('./src', true, /\.vue$/i)
             files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
         }
 
-        if (options.hasMoment) {
-            window.moment = require('moment/min/moment.min')
-            // import('moment')
-            // .then((moment) => {
-            //     window.moment = moment
-            // })
-        }
-
-        if (options.hasVMoney) {
-            const money = require('v-money');
-            Vue.use(money, {
-                decimal: '.',
-                thousands: '',
-                prefix: 'RM ',
-                suffix: '',
-                precision: 2,
-                masked: true
-            })
-        }
-
-        if (options.hasAOS) {
-            const AOS = require('aos');
-            require('aos/dist/aos.css');
-        }
-
-        if (options.hasVueButtonSpinner) {
-            const VueButtonSpinner = require('vue-button-spinner').default;
-            Vue.component('ButtonSpinner', VueButtonSpinner);
-        }
-
         if (options.hasDirectives) require('./src/directives');
-
-        if (options.hasVueCtkDateTimePicker) {
-            let VueCtkDateTimePicker = require('vue-ctk-date-time-picker');
-            require('vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css');
-            Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker);
-        }
     }
 }
