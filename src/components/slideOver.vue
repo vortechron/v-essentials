@@ -30,7 +30,7 @@
                                         </h2>
                                         <div class="h-7 flex items-center">
                                             <button
-                                                @click="hide()"
+                                                @click.prevent="hide()"
                                                 aria-label="Close panel"
                                                 class="text-indigo-200 hover:text-white transition ease-in-out duration-150"
                                             >
@@ -73,18 +73,18 @@
                             <div
                                 class="flex-shrink-0 px-4 py-4 space-x-4 flex justify-end"
                             >
-                                <span class="inline-flex rounded-md shadow-sm">
+                                <span class="inline-flex rounded-md shadow-sm cancel">
                                     <button
-                                        @click="hide()"
+                                        @click.prevent="hide()"
                                         type="button"
                                         class="py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
                                     >
-                                        Cancel
+                                        {{ cancelLabel || 'Cancel' }}
                                     </button>
                                 </span>
-                                <span class="inline-flex rounded-md shadow-sm">
+                                <span class="inline-flex rounded-md shadow-sm ok">
                                     <button
-                                        @click="$emit('ok')"
+                                        @click.prevent="$emit('ok')"
                                         type="submit"
                                         class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
                                     >
@@ -109,10 +109,16 @@ export default {
         title: String,
         subtitle: String,
         okLabel: String,
+        cancelLabel: String,
         maxWidth: {
             type: String,
             default: 'md'
         },
+    },
+    watch: {
+        isShow(val) {
+            if (! val) this.$emit('cancel')
+        }
     }
 };
 </script>
