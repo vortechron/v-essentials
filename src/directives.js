@@ -14,7 +14,7 @@ Vue.directive('submission', {
         let loader = (action) => {
         if (action == 'start') {
             $(el).attr('data-btn-text', $(el).text());
-            $(el).html('<span class="spinner"><i class="fa fa-spinner fa-spin"></i></span> &nbsp;'+ $(el).attr('data-btn-text'));
+            $(el).html('<span class="spinner mr-1"><i class="fa fa-spinner fa-spin"></i></span> &nbsp;'+ $(el).attr('data-btn-text'));
             $(el).addClass('active');
           }
 
@@ -29,7 +29,6 @@ Vue.directive('submission', {
 
             let statusError = false;
             binding.value.forEach((value) => {
-
               let comp = typeof value == 'object' ? value : instance.$refs[value];
               if (! comp || ! comp.$options) return;
               
@@ -48,7 +47,7 @@ Vue.directive('submission', {
             })
             
             if (statusError) {
-                e.preventDefault()
+              e.preventDefault()
             }
 
             setTimeout(() => {
@@ -61,6 +60,39 @@ Vue.directive('submission', {
             }, 3000)
 
         })
+    }
+})
+
+// v-spinner
+Vue.directive('spinner', {
+    bind: function (el, binding, vnode) {
+        const instance = vnode.context;
+
+        let firstChild = el.firstElementChild
+        if (firstChild) el = firstChild
+        el.classList.add("has-spinner");
+
+        let loader = (action) => {
+          if (action == 'start') {
+            $(el).attr('data-btn-text', $(el).text());
+            $(el).html('<span class="spinner mr-1"><i class="fa fa-spinner fa-spin"></i></span> &nbsp;'+ $(el).attr('data-btn-text'));
+            $(el).addClass('active');
+          }
+
+          if (action == 'stop') {
+            $(el).html($(el).attr('data-btn-text'));
+            $(el).removeClass('active');
+          }
+        }
+
+        el.addEventListener('click', (e) => {
+          loader('start')
+          setTimeout(() => {
+            loader('stop')
+          }, 3000)
+      })
+
+        
     }
 })
 

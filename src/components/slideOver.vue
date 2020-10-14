@@ -1,5 +1,8 @@
 <template>
-    <div v-show="computedShow" class="fixed inset-0 overflow-hidden z-10 slide-over">
+    <transition
+        leave-active-class="duration-500 sm:duration-700"
+    >
+    <div v-show="isShow" class="fixed inset-0 overflow-hidden z-10 slide-over">
         <div class="absolute inset-0 overflow-hidden">
             <section class="absolute inset-y-0 pl-0 sm:pl-16 max-w-full right-0 flex">
                 <transition
@@ -14,9 +17,11 @@
                     :class="`max-w-${maxWidth}`"
                     >
                         <div
-                            class="h-full divide-y divide-gray-200 flex flex-col bg-white shadow-xl"
+                            class="h-full divide-y divide-gray-200 flex flex-col bg-white shadow-xl relative"
                         >
+                            <slot name="before"></slot>
                             <div class="flex-1 h-0 overflow-y-auto">
+
                                 <header
                                     class="space-y-1 py-6 px-4 bg-indigo-700 sm:px-6"
                                 >
@@ -98,6 +103,7 @@
             </section>
         </div>
     </div>
+    </transition>
 </template>
 
 <script>

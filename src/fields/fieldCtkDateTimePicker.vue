@@ -18,3 +18,9 @@
          }
    };
 </script>
+
+<style>
+.field-clear-button {
+    margin: auto 0 !important;
+}
+</style>

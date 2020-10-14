@@ -13,7 +13,8 @@
         props: {
             model: Object,
             options: Object,
-            isRow: Boolean
+            isRow: Boolean,
+            styleClasses: String
         },
         data() {
             return {
@@ -32,7 +33,7 @@
             var x = `
             ${this.isRow ? '{ "groups": [' : ''}
             {
-                ${this.isRow ? '"styleClasses": "form-row",' : ''}
+                ${this.isRow ? `"styleClasses": "form-row ${this.styleClasses}",` : ''}
                 "fields": [
                     ${this.$slots.default[0].text}
                 ]

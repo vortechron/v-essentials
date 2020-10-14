@@ -33,6 +33,9 @@ Vue.mixin({
         }
     },
     methods: {
+        uniqueId() {
+            return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        },
         validateAndSubmit(vfgs, form) {
             let statusError = false;
             vfgs.forEach((vfg) => {
@@ -42,14 +45,18 @@ Vue.mixin({
                 vfg.validate()
                 if (vfg.errors.length != 0) statusError = true;
             })
-            
-            if (! statusError) form.submit()
 
-            setTimeout(() => {
-            $('html, body').animate({
-                scrollTop: $('.error').offset().top - 200
-            }, 500);
-            }, 500)
+            if (! statusError) {
+                if (typeof form === "function") form() 
+                else form.submit()
+            } else {
+                setTimeout(() => {
+                    $('html, body').animate({
+                        scrollTop: $('.error').offset().top - 200
+                    }, 500);
+                }, 500)
+            }
+
         },
         getMeta(metaName) {
             const metas = document.getElementsByTagName("meta");
@@ -81,9 +88,11 @@ Vue.mixin({
         },
         vueMultiselectCustomLabel(collections, key = "name", pluck = "id") {
             return opt => {
-                return this.model[collections].find(function(item) {
+                let result = this.model[collections].find(function(item) {
                     return item[pluck] == opt;
-                })[key];
+                });
+
+                return result ? result[key] : null
             };
         },
         vueMultiselectValuesByCollections(collections, pluck = "id") {
@@ -91,9 +100,12 @@ Vue.mixin({
         },
         vueMultiselectCustomLabelByCollections(collections, key = "name", pluck = "id") {
             return opt => {
-                return collections.find(function(item) {
+            console.log(this)
+                let result = collections.find(function(item) {
                     return item[pluck] == opt;
-                })[key];
+                });
+
+                return result ? result[key] : null
             };
         },
         formatBytes(bytes, decimals = 2) {

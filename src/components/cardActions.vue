@@ -60,12 +60,16 @@ export default {
         },
         deleteLabel: String,
         saveLabel: String,
-        saveAndCloseLabel: String
+        saveAndCloseLabel: String,
+        formRefs: {
+            type: Array,
+            default: () => []
+        }
     },
     data() {
         return {
             modelData: null,
-            refs: []
+            refs: this.formRefs
         }
     },
     methods: {
@@ -94,6 +98,7 @@ export default {
 
         this.modelData = this.data ? this.data : this.$window._data
         
+        if (this.formRefs.length == 0)
         this.walkAParent(this.$parent, (parent) => {
             if (parent.$refs) {
                 _.forEach(parent.$refs, (ref) => {

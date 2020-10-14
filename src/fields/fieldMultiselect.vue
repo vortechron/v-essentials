@@ -29,7 +29,7 @@
 		:show-labels="selectOptions.showLabels"
 		:limit="selectOptions.limit"
 		:limit-text="selectOptions.limitText"
-		:loading="selectOptions.loading"
+		:loading="isLoading"
 		:disabled="disabled"
 		:max-height="selectOptions.maxHeight"
 		:show-pointer="selectOptions.showPointer"
@@ -58,18 +58,15 @@ import { abstractField } from "vue-form-generator";
 
 export default {
 	mixins: [abstractField],
+	data() {
+		return {
+			options: [],
+			isLoading: false,
+		}
+	},
 	computed: {
 		selectOptions() {
 			return this.schema.selectOptions || {};
-		},
-
-		options() {
-			let values = this.schema.values;
-			if (typeof values == "function") {
-				return values.apply(this, [this.model, this.schema]);
-			} else {
-				return values;
-			}
 		},
 		customLabel() {
 			if (
@@ -99,7 +96,12 @@ export default {
 		onSearchChange(searchQuery, id) {
 			let onSearch = this.selectOptions.onSearch;
 			if (typeof onSearch == "function") {
-				onSearch(searchQuery, id, this.options);
+				this.isLoading = true;
+				onSearch(searchQuery, this.model).then(response => {
+					console.log(response);
+					this.options = response;
+					this.isLoading = false;
+				});
 			}
 		},
 		onSelect(/* selectedOption, id */) {
@@ -109,7 +111,7 @@ export default {
 			// console.log("onRemove", removedOption, id);
 		},
 		onOpen(/* id */) {
-			// console.log("onOpen", id);
+
 		},
 		onClose(/* value, id */) {
 			// console.log("onClose", value, id);
@@ -119,6 +121,13 @@ export default {
 		// Check if the component is loaded globally
 		if (!this.$root.$options.components["multiselect"]) {
 			console.error("'vue-multiselect' is missing. Please download from https://github.com/monterail/vue-multiselect and register the component globally!");
+		}
+
+		let values = this.schema.values;
+		if (typeof(values) === 'function') {
+			this.options = values.apply(this, [this.model, this.schema]);
+		} else {
+			this.options = values;
 		}
 	}
 };

@@ -1,6 +1,7 @@
 <template>
+  <transition leave-active-class="duration-200">
   <div
-    v-show="computedShow"
+    v-show="isShow"
     class="z-50 fixed bottom-0 inset-x-0 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center overflow-y-auto"
   >
     <transition
@@ -77,6 +78,7 @@
       </div>
     </transition>
   </div>
+  </transition>
 </template>
 
 <script>
