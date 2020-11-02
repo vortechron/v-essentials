@@ -1,5 +1,4 @@
 window.Droppable = require('droppable').default;
-const _ = require('lodash');
 window.enablePageChangeWarn = true;
 
 module.exports = {
@@ -33,6 +32,8 @@ module.exports = {
             files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
         }
 
-        if (options.hasDirectives) require('./src/directives');
+        if (options.hasDirectives) {
+            require('./src/directives')
+        }
     }
 }

@@ -26,7 +26,7 @@
                       </svg>
                     </div>
                     <div class="ml-4">
-                      <input type="hidden" :name="`${schema.inputName}[media][${index}]`" v-model="m.id" />
+                      <input type="hidden" :name="`${schema.inputName}[${index}][id]`" v-model="m.id" />
                       <div
                         class="text-sm leading-5 font-medium text-gray-900"
                       >{{ m.file_name }}</div>
@@ -57,7 +57,6 @@
         </div>
       </div>
     </div>
-    <input type="hidden" :name="`${schema.inputName}[key]`" v-model="key" />
     <media-upload 
     :id="fieldId" 
     :is-show="schema.multiple || ((! schema.multiple) && media && media.length == 0)" 
@@ -71,15 +70,6 @@
 </template>
 
 <script>
-// need to npm install droppable
-
-// cssClasses: 'w-full',
-// inputName: 'fonts[]',
-// multiple: true,
-// accept: null ,
-// placeholder: 'Font File Only',
-// model: "files",
-
 import { forEach } from "lodash";
 import { abstractField } from "vue-form-generator";
 import { SlideYDownTransition } from "vue2-transitions";
@@ -116,7 +106,6 @@ export default {
     uploadMedia(files) {
       var formData = new FormData();
 
-      formData.append(`key`, this.key);
       forEach(files, (file, index) => {
         formData.append(`media[]`, file);
       });

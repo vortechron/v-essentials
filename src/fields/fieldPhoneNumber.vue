@@ -13,10 +13,10 @@
                 >
                     <template slot="singleLabel" slot-scope="props">
                         <div class="flex items-center">
-                            <img
+                            <!-- <img
                                 class="h-4 pr-3 hidden sm:block"
                                 :src="props.option.flag"
-                            />
+                            /> -->
                             <span class="option__title">
                                 +{{ props.option.calling_code }}
                             </span>
@@ -24,11 +24,11 @@
                     </template>
                     <template slot="option" slot-scope="props">
                         <div class="flex items-center group">
-                            <img
+                            <!-- <img
                                 class="h-4 pr-3"
                                 :src="props.option.flag"
                                 alt="No Man’s Sky"
-                            />
+                            /> -->
                             <span class="option__title">
                                 {{ props.option.name }}
                             </span>
@@ -186,7 +186,13 @@ export default {
         send() {
           // this.$refs.modal.show(); return
             this.isLoading = true
-            axios.post(this.schema.sendUrl, this.value).then(response => {
+            // todo: fix broken axios instance
+              const axiosConfig = {
+                    headers: {
+                        'X-XSRF-TOKEN': this.getCookie('XSRF-TOKEN')
+                    }
+                };
+            axios.post(this.schema.sendUrl, this.value, axiosConfig).then(response => {
                 if (response.data.status) this.$refs.modal.show();
 
                 this.isLoading = false
@@ -201,11 +207,17 @@ export default {
             this.isLoading = true
             // return
             let verification_code = `${this.val1}${this.val2}${this.val3}${this.val4}`;
+            // todo: fix broken axios instance
+              const axiosConfig = {
+                    headers: {
+                        'X-XSRF-TOKEN': this.getCookie('XSRF-TOKEN')
+                    }
+                };
             axios
                 .post(this.schema.verifyUrl, {
                     ...this.value,
                     verification_code
-                })
+                }, axiosConfig)
                 .then(response => {
                     if (response.data.status) {
                         this.$refs.modal.hide();
@@ -220,7 +232,14 @@ export default {
         },
         check() {
           if (this.value.code && this.value.number && this.schema.mustVerified) {
-              axios.post(this.schema.checkUrl, this.value).then(response => {
+
+              // todo: fix broken axios instance
+              const axiosConfig = {
+                    headers: {
+                        'X-XSRF-TOKEN': this.getCookie('XSRF-TOKEN')
+                    }
+                };
+              axios.post(this.schema.checkUrl, this.value, axiosConfig).then(response => {
                   this.isVerified = response.data.status;
               });
           }
@@ -275,7 +294,6 @@ export default {
             this.code = _.find(this.countries, ["calling_code", this.value.code]);
             this.number = this.value.number;
         }
-
 
         this.check();
     }

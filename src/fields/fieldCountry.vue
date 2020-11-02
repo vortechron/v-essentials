@@ -10,10 +10,10 @@
         >
             <template slot="singleLabel" slot-scope="props">
                 <div class="flex items-center">
-                    <img
+                    <!-- <img
                         class="h-4 pr-3 hidden sm:block"
                         :src="props.option.flag"
-                    />
+                    /> -->
                     <span class="option__title">
                         {{ props.option.name }}
                     </span>
@@ -21,10 +21,10 @@
             </template>
             <template slot="option" slot-scope="props">
                 <div class="flex items-center group">
-                    <img
+                    <!-- <img
                         class="h-4 pr-3"
                         :src="props.option.flag"
-                    />
+                    /> -->
                     <span class="option__title">
                         {{ props.option.name }}
                     </span>

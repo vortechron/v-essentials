@@ -3,8 +3,8 @@
     <h3 class="text-lg leading-6 font-medium text-gray-900">
         {{ title }}
       </h3>
-      <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500 mb-3">
-          {{ subtitle }}        
+      <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+        {{ subtitle }}        
       </p>
   </div>
 </template>

@@ -1,6 +1,6 @@
 import ClickOutside from 'vue-click-outside'
+import Vue from 'vue';
 
-// v-submission.spinner="[vfg]"
 Vue.directive('submission', {
     bind: function (el, binding, vnode) {
         const instance = vnode.context;
@@ -12,7 +12,7 @@ Vue.directive('submission', {
         }
 
         let loader = (action) => {
-        if (action == 'start') {
+          if (action == 'start') {
             $(el).attr('data-btn-text', $(el).text());
             $(el).html('<span class="spinner mr-1"><i class="fa fa-spinner fa-spin"></i></span> &nbsp;'+ $(el).attr('data-btn-text'));
             $(el).addClass('active');
@@ -55,6 +55,7 @@ Vue.directive('submission', {
                 scrollTop: $('.error').offset().top - 200
               }, 500);
             }, 500)
+            
             setTimeout(() => {
               loader('stop')
             }, 3000)

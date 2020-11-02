@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 window.VueFormGenerator = require('vue-form-generator')
 Vue.use(VueFormGenerator, {
     validators: {
