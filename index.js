@@ -4,8 +4,6 @@ window.enablePageChangeWarn = true;
 module.exports = {
 
     install(Vue, options) {
-        const pace = require('./src/pace')
-        pace.start()
 
         window.enablePageChangeWarn = false
         window.onload = function() {
@@ -22,6 +20,11 @@ module.exports = {
                 return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
             });
         };
+
+        if (options.hasPace) {
+            const pace = require('./src/pace')
+            pace.start()
+        }
 
         if (options.hasMixins) {
             require('./src/mixins')
