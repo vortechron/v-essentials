@@ -8,7 +8,7 @@
             "
             @click="showSort = !showSort"
             type="button"
-            class="relative inline-flex items-center px-4 py-2 rounded-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+            class="relative inline-flex items-center px-4 py-2 rounded-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
         >
             <svg
                 class="-ml-1 mr-2 h-5 w-5 text-gray-400 hidden sm:block"
@@ -37,7 +37,7 @@
                 v-show="showSort"
                 class="origin-top-right absolute right-0 mt-1/2 w-56 rounded-md shadow-lg z-10"
             >
-                <div class="rounded-md bg-white shadow-xs">
+                <div class="rounded-md bg-white ring-1 ring-black ring-opacity-5">
                     <slot @change="$logs($event)"></slot>
                 </div>
             </div>

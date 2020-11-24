@@ -64259,7 +64259,7 @@ var render = function() {
                             {
                               key: index,
                               staticClass:
-                                "px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                                "px-6 py-4 whitespace-nowrap border-b border-gray-200"
                             },
                             [
                               _c(
@@ -64304,7 +64304,7 @@ var render = function() {
                           "td",
                           {
                             staticClass:
-                              "cursor-pointer pr-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium",
+                              "cursor-pointer pr-6 py-4 whitespace-nowrap text-right border-b border-gray-200 text-sm leading-5 font-medium",
                             on: {
                               click: function($event) {
                                 return _vm.removeRow(indexParent)

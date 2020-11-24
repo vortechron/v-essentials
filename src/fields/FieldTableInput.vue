@@ -22,7 +22,7 @@
                 <td
                   v-for="(field, index) in schema.fields"
                   :key="index"
-                  class="px-6 py-4 whitespace-no-wrap border-b border-gray-200"
+                  class="px-6 py-4 whitespace-nowrap border-b border-gray-200"
                 >
                   <div class="max-w-xs rounded-md shadow-sm">
                     <input
@@ -34,7 +34,7 @@
                 </td>
                 <td
                   @click="removeRow(indexParent)"
-                  class="cursor-pointer pr-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium"
+                  class="cursor-pointer pr-6 py-4 whitespace-nowrap text-right border-b border-gray-200 text-sm leading-5 font-medium"
                 >
                   <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5 text-red-700">
                     <path

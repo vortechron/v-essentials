@@ -42,7 +42,7 @@ export default {
                     "bg-{{color}}-600",
                     "hover:bg-{{color}}-500",
                     "focus:border-{{color}}-700",
-                    "focus:shadow-outline-{{color}}",
+                    "focus:ring-{{color}}",
                     "active:bg-{{color}}-700"
                 ],
                 secondary: [
@@ -51,7 +51,7 @@ export default {
                     "bg-{{color}}-100",
                     "hover:bg-{{color}}-50",
                     "focus:border-{{color}}-300",
-                    "focus:shadow-outline-{{color}}",
+                    "focus:ring-{{color}}",
                     "active:bg-{{color}}-200"
                 ],
                 white: [
@@ -60,7 +60,7 @@ export default {
                     "bg-white",
                     "hover:text-gray-500",
                     "focus:border-blue-300",
-                    "focus:shadow-outline-blue",
+                    "focus:ring-blue",
                     "active:text-gray-800",
                     "active:bg-gray-50"
                 ]

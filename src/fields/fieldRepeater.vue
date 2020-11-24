@@ -4,13 +4,13 @@
             <div class="px-6 py-5 border-2 border-dashed rounded-md border-gray-300 mb-3">
                 <vue-form-generator :ref="`vfg_${index}`" tag="div" :schema="fields(index)" :model="rep" :options="formOptions"></vue-form-generator>
 
-                <button v-if="!schema.disabled" @click.prevent="value.splice(index, 1)" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-red-700 bg-red-100 hover:bg-red-50 focus:outline-none focus:border-red-300 focus:shadow-outline-red active:bg-red-200 transition ease-in-out duration-150">
+                <button v-if="!schema.disabled" @click.prevent="value.splice(index, 1)" type="button" class="inline-flex items-center px-2.5 py-1.5 border border-transparent text-xs leading-4 font-medium rounded text-red-700 bg-red-100 hover:bg-red-50 focus:outline-none focus:border-red-300 focus:ring-red active:bg-red-200 transition ease-in-out duration-150">
                     Delete
                 </button>
             </div>
         </div>
 
-        <button :id="schema.addId || 'repeater-add-button'" v-if="(typeof schema.showAddButton === 'undefined' ? true : schema.showAddButton) && !schema.disabled" @click.prevent="value.push({})" class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 text-xs leading-4 font-medium rounded text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">
+        <button :id="schema.addId || 'repeater-add-button'" v-if="(typeof schema.showAddButton === 'undefined' ? true : schema.showAddButton) && !schema.disabled" @click.prevent="value.push({})" class="inline-flex items-center px-2.5 py-1.5 border border-gray-300 text-xs leading-4 font-medium rounded text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring-blue active:text-gray-800 active:bg-gray-50 transition ease-in-out duration-150">
             {{ schema.addLabel || 'Add' }}
         </button>
     </div>

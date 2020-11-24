@@ -37,7 +37,7 @@
                     <button
                         v-if="!noNotification"
                         @click="notiShow = !notiShow"
-                        class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500 "
+                        class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring focus:text-gray-500 "
                         aria-label="Notifications"
                     >
                         <svg
@@ -67,7 +67,7 @@
                         <div>
                             <button
                                 @click="profileShow = !profileShow"
-                                class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:shadow-outline"
+                                class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring"
                                 id="user-menu"
                                 aria-label="User menu"
                                 aria-haspopup="true"

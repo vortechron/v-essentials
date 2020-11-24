@@ -8,7 +8,7 @@
           <table class="min-w-full">
             <slide-y-down-transition group tag="tbody" :duration="600">
               <tr v-for="(m, index) in media" :key="m.id" class=" bg-white">
-                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                <td class="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <div class="flex items-center">
                     <div class="flex-shrink-0 h-10 w-10">
                       <img
@@ -37,7 +37,7 @@
 
                 <td
                   @click="removeMedia(index)"
-                  class="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium"
+                  class="px-6 py-4 whitespace-nowrap text-right border-b border-gray-200 text-sm leading-5 font-medium"
                 >
                   <svg
                     fill="currentColor"

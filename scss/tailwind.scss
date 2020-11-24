@@ -26,7 +26,7 @@
   }
   
   .tw-table td {
-    @apply px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-600;
+    @apply px-6 py-4 whitespace-nowrap border-b border-gray-200 text-sm leading-5 font-medium text-gray-600;
   }
   
   .is-bulkable tr td:first-child {
@@ -34,7 +34,7 @@
   }
   
   .is-actionable tr td:last-child {
-    @apply px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium #{!important};
+    @apply px-6 py-4 whitespace-nowrap text-right border-b border-gray-200 text-sm leading-5 font-medium #{!important};
   }
   
   .is-actionable tr th:last-child {

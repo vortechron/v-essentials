@@ -7177,7 +7177,7 @@ button.bg-dark:focus {
   border-radius: 0 !important;
 }
 
-.clearfix::after {
+.flow-root::after {
   display: block;
   clear: both;
   content: "";
@@ -13473,7 +13473,7 @@ p.lead strong {
   color: #adb5bd;
 }
 
-.dp-clearfix {
+.dp-flow-root {
   clear: both;
   height: 0;
   font-size: 0;

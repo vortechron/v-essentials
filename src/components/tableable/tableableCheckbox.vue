@@ -4,7 +4,7 @@
             v-bind="$attrs"
             aria-label="Select all"
             type="checkbox"
-            class="tableable form-checkbox h-4 w-4 border-gray-300 text-indigo-600 focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out"
+            class="tableable form-checkbox h-4 w-4 border-gray-300 text-indigo-600 focus:ring-blue focus:border-blue-300 transition duration-150 ease-in-out"
         />
     </span>
 </template>

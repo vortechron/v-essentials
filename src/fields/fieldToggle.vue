@@ -2,7 +2,7 @@
 <template>
     <div class="w-full mt-1">
         <div class="flex items-center">
-            <span @click="toggle" :class="[ value ? 'bg-indigo-600' : 'bg-gray-200' ]" role="checkbox" tabindex="0" aria-checked="false" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline">
+            <span @click="toggle" :class="[ value ? 'bg-indigo-600' : 'bg-gray-200' ]" role="checkbox" tabindex="0" aria-checked="false" class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring">
                 <span :class="[ value ? 'translate-x-5' : 'translate-x-0' ]" aria-hidden="true" class="translate-x-0 relative inline-block h-5 w-5 rounded-full bg-white shadow transform transition ease-in-out duration-200">
                     <!-- On: "opacity-0 ease-out duration-100", Off: "opacity-100 ease-in duration-200" -->
                     <span :class="[ value ? 'opacity-0 hidden ease-out duration-100' : 'opacity-100 ease-in duration-200' ]" class="opacity-100 ease-in duration-200 absolute inset-0 h-full w-full flex items-center justify-center transition-opacity">
