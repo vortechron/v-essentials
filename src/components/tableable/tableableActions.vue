@@ -74,7 +74,11 @@
 </template>
 
 <script>
+import filterAction from './../filterAction'
+import sortAction from './../sortAction/sortAction'
+
 export default {
+    components: {sortAction, filterAction},
     props: {
         hasBulk: Boolean
     },

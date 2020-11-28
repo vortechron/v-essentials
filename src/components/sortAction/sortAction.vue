@@ -38,7 +38,7 @@
                 class="origin-top-right absolute right-0 mt-1/2 w-56 rounded-md shadow-lg z-10"
             >
                 <div class="rounded-md bg-white ring-1 ring-black ring-opacity-5">
-                    <slot @change="$logs($event)"></slot>
+                    <slot></slot>
                 </div>
             </div>
         </transition>

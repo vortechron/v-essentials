@@ -22,14 +22,18 @@
                 Filter
             </button>
         </span>
-        <modal ref="modalFilter" ok-label="Filter" @ok="$emit('change')">
+        <modal ref="modalFilter" title="Filter" ok-label="Filter" @ok="$emit('change')">
             <slot></slot>
         </modal>
     </div>
 </template>
 
 <script>
-export default {};
+import modal from './slideOver'
+
+export default {
+    components: {modal}
+};
 </script>
 
 <style></style>

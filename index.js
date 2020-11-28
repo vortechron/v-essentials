@@ -11,7 +11,7 @@ module.exports = {
 
                 if (! window.enablePageChangeWarn) {
                     return undefined;
-                }
+                } 
         
                 var confirmationMessage = 'It looks like you have been editing something. '
                                         + 'If you leave before saving, your changes will be lost.';
@@ -31,8 +31,16 @@ module.exports = {
         }
 
         if (options.hasAutoRegister) {
-            const files = require.context('./src', true, /\.vue$/i)
-            files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+            const fields = require.context('./src/fields', true, /\.vue$/i)
+            fields.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], fields(key).default))
+            
+            const components = require.context('./src/components', true, /\.vue$/i)
+            const prefix = options.componentPrefix || "v"
+            components.keys().map(key => {
+                let baseName = key.split('/').pop().split('.')[0]
+                let name = baseName.charAt(0).toUpperCase() + baseName.slice(1)
+                Vue.component(prefix + name, components(key).default)
+            })
         }
 
         if (options.hasDirectives) {

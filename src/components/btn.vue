@@ -1,5 +1,5 @@
 <template>
-    <span :class="`inline-flex rounded-md shadow-sm ${theme}`">
+    <span @click="$emit('click')" :class="`inline-flex rounded-md shadow-sm ${theme}`">
         <component :is="$attrs.href ? 'a' : 'button'"
             v-bind="$attrs"
             class="inline-flex items-center border text-xs font-medium rounded focus:outline-none transition ease-in-out duration-150"
