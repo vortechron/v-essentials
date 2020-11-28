@@ -20,7 +20,7 @@
             >
                 {{ deleteLabel || 'Delete' }}
             </btn>
-            <btn @click.native="save"
+            <btn @click="save"
                 v-show="!noSaveAndClose"
                 v-submission.spinner="refs"
                 type="submit" 
@@ -29,7 +29,7 @@
             >
                 {{ saveAndCloseLabel || 'Save & Close' }}
             </btn>
-            <btn @click.native="save"
+            <btn @click="save"
                 :id="saveId"
                 v-submission.spinner="refs"
                 type="submit" 

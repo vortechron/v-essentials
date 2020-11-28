@@ -21,7 +21,7 @@
                             v-if="actionLabel"
                             size="md"
                             :color="actionColor"
-                            @click.native="$emit('action')"
+                            @click="$emit('action')"
                             :href="actionUrl"
                         >
                             {{ actionLabel }}
