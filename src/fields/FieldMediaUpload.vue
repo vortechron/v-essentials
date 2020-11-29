@@ -73,10 +73,12 @@
 import { forEach } from "lodash";
 import { abstractField } from "vue-form-generator";
 import { SlideYDownTransition } from "vue2-transitions";
+import mediaUpload from './../components/mediaUpload'
 
 export default {
   components: {
-    SlideYDownTransition
+    SlideYDownTransition,
+    mediaUpload
   },
   mixins: [abstractField],
   data() {

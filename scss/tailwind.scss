@@ -1,28 +1,30 @@
+@import "vue-form-generator/dist/vfg.css"; 
+
 .multiselect__tags, .form-control, .date-time-picker input {
-    @apply border-gray-300 #{!important};
+    @apply border-gray-300 !important;
     -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
     box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
   }
   
   .date-time-picker .time-picker button {
-    @apply border-transparent #{!important};
+    @apply border-transparent !important;
     background-color: transparent !important;
   }
   
   .multiselect__placeholder {
-    margin-bottom: 7px #{!important};
+    margin-bottom: 7px !important;
   }
   
   .tw-table {
-    @apply align-middle rounded-b-sm inline-block min-w-full shadow overflow-x-auto border-b border-gray-200  #{!important};
+    @apply align-middle rounded-b-sm inline-block min-w-full shadow overflow-x-auto border-b border-gray-200  !important;
   }
   
   .tw-table table {
-    @apply min-w-full #{!important};
+    @apply min-w-full !important;
   }
   
   .tw-table th {
-    @apply px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider #{!important};
+    @apply px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-700 uppercase tracking-wider !important;
   }
   
   .tw-table td {
@@ -30,15 +32,15 @@
   }
   
   .is-bulkable tr td:first-child {
-    @apply pl-6 pr-0 #{!important};
+    @apply pl-6 pr-0 !important;
   }
   
   .is-actionable tr td:last-child {
-    @apply px-6 py-4 whitespace-nowrap text-right border-b border-gray-200 text-sm leading-5 font-medium #{!important};
+    @apply px-6 py-4 whitespace-nowrap text-right border-b border-gray-200 text-sm leading-5 font-medium !important;
   }
   
   .is-actionable tr th:last-child {
-    @apply px-6 py-3 border-b border-gray-200 bg-gray-50 #{!important};
+    @apply px-6 py-3 border-b border-gray-200 bg-gray-50 !important;
   }
   
   .spinner {

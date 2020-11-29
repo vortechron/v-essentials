@@ -1,8 +1,7 @@
 <template>
     <div>
         <div style="visibility: hidden; display: none;">
-            <slot>
-            </slot>
+            <slot></slot>
         </div>
         <vue-form-generator tag="div" :schema="schema" :model="model" :options="options"></vue-form-generator>
     </div>
@@ -12,7 +11,12 @@
     export default {
         props: {
             model: Object,
-            options: Object,
+            options: {
+                type: Object,
+                default() {
+                    return { validateAfterChanged: true }
+                }
+            },
             isRow: Boolean,
             styleClasses: String
         },
