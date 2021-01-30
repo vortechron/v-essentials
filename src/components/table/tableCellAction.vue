@@ -2,6 +2,11 @@
     <td class="pr-6">
         <div class="relative flex justify-end items-center">
             <button
+                v-click-outside="
+                () => {
+                    showDropdown = false;
+                }
+                "
                 @click="showDropdown = !showDropdown"
                 id="project-options-menu-0"
                 aria-has-popup="true"
@@ -9,7 +14,6 @@
                 class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
             >
                 <span class="sr-only">Open options</span>
-                <!-- Heroicon name: dots-vertical -->
                 <svg
                     class="w-5 h-5"
                     xmlns="http://www.w3.org/2000/svg"
