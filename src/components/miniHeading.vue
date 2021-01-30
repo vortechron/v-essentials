@@ -12,7 +12,10 @@
 </template>
 
 <script>
+import iconPack from './iconPack'
+
 export default {
+    components: {iconPack},
     props: {
         icon: String,
         title: String,

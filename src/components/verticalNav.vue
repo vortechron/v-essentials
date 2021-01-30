@@ -1,6 +1,8 @@
 <template>
-    <a
-        :href="href"
+    <component
+        v-bind="$attrs"
+        :is="component"
+        :href="href || '#'"
         :class="[
             ...styleClasses.common,
             isActive
@@ -24,12 +26,20 @@
         <span class="truncate">
             <slot></slot>
         </span>
-    </a>
+    </component>
 </template>
 
 <script>
+import iconPack from './iconPack'
+
 export default {
+    inheritAttrs: false,
+    components: {iconPack},
     props: {
+        component: {
+            type: String,
+            default: 'a'
+        },
         href: String,
         icon: String,
         isActive: Boolean

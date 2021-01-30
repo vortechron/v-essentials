@@ -49,7 +49,7 @@
                 >
                     <div
                         v-show="showBulk"
-                        class="absolute ml-1/5 mt-1/4 origin-top-left rounded-md shadow-lg w-56 z-10 rounded"
+                        class="absolute ml-1/5 mt-1/4 origin-top-left shadow-lg w-56 z-10 rounded"
                     >
                         <div class="rounded-md bg-white ring-1 ring-black ring-opacity-5">
                             <div class="py-1">
@@ -60,12 +60,12 @@
                 </transition>
             </div>
 
-            <filter-action @change="$refs.form.submit()">
+            <filter-action v-if="hasSlot('filter')" @change="$emit('filter')">
                 <slot name="filter"></slot>
             </filter-action>
         </div>
 
-        <div class="ml-2">
+        <div class="ml-2" v-if="hasSlot('sort')">
             <sort-action class="float-right">
                 <slot name="sort"></slot>
             </sort-action>
@@ -89,7 +89,6 @@ export default {
     },
     methods: {
         submit() {
-            this.$refs.form.submit()
             this.$refs.form.submit()
         }
     },

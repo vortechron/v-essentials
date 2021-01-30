@@ -7,7 +7,10 @@
 </template>
 
 <script>
+import card from './../card'
+
 export default {
+  components: {card},
   props: {
     col: {
       type: Number,

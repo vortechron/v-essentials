@@ -1,5 +1,5 @@
 <template>
-    <form ref="searchform" :action="endpoint" class="flex-1 flex">
+    <div class="flex-1 flex">
         <div class="w-full flex md:ml-0">
             <label for="search_field" class="sr-only">Search</label>
             <div
@@ -22,22 +22,31 @@
                 </div>
                 <input
                     id="search_field"
-                    class="block w-full h-full pl-8 pr-3 py-2 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 sm:text-sm"
+                    class="border-0 block w-full h-full pl-8 pr-3 py-2 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 sm:text-sm focus:ring-0"
                     placeholder="Search"
                     type="search"
                     name="q"
-                    :value="value"
-                    @input="$emit('input', $event.target.value)"
-                    @enter="$refs.searchform.submit()"
+                    v-model="q"
+                    @keydown.enter="atEnter"
                 />
             </div>
         </div>
-    </form>
+    </div>
 </template>
 
 <script>
 export default {
     props: ['endpoint', 'value'],
+    data() {
+        return {
+            q: this.value
+        }
+    },
+    methods: {
+        atEnter() {
+            this.$emit('search', this.q)
+        }
+    }
 };
 </script>
 

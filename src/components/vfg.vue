@@ -3,13 +3,14 @@
         <div style="visibility: hidden; display: none;">
             <slot></slot>
         </div>
-        <vue-form-generator tag="div" :schema="schema" :model="model" :options="options"></vue-form-generator>
+        <vue-form-generator tag="div" :schema="schemaData" :model="model" :options="options"></vue-form-generator>
     </div>
 </template>
 
 <script>
     export default {
         props: {
+            schema: Object,
             model: Object,
             options: {
                 type: Object,
@@ -22,7 +23,7 @@
         },
         data() {
             return {
-                schema: {}
+                schemaData: this.schema
             }
         },
         methods: {
@@ -44,7 +45,7 @@
             }
             ${this.isRow ? ']}' : ''}
             `;
-            eval("this.schema =" + x);
+            eval("this.schemaData =" + x);
 
             this.$slots = []
         }

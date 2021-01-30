@@ -17,8 +17,11 @@
 </template>
 
 <script>
+import tabNav from './tabNav/tabNav'
+import tabNavButton from './tabNav/tabNavButton'
 
 export default {
+    components: {tabNav, tabNavButton},
     props: {
         initialIndex: Number,
         forceTabNav: Boolean

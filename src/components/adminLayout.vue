@@ -30,38 +30,22 @@
                 </svg>
             </button>
             <div class="flex-1 px-4 flex" :class="[hasSearch ? 'justify-between' : 'justify-end']">
-                <search-bar :endpoint="searchEndpoint" v-if="hasSearch"></search-bar>
+                <search-bar :endpoint="searchEndpoint" @search="$emit('search', $event)" v-if="hasSearch"></search-bar>
                 <div class="ml-4 flex items-center md:ml-6">
                     <div class="relative mt-1">
 
                     <button
-                        v-if="!noNotification"
-                        @click="notiShow = !notiShow"
+                        @click="$emit('eye')"
                         class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring focus:text-gray-500 "
                         aria-label="Notifications"
                     >
-                        <svg
-                            class="h-6 w-6"
-                            stroke="currentColor"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                            ></path>
-                        </svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                     </button>
-
-                    <dropdown :is-show="notiShow">
-                        <dropdown-button>asdas</dropdown-button>
-                    </dropdown>
                     </div>
 
                     <!-- Profile dropdown -->
                     <div
+                        v-if="!hideProfileDropdown"
                         class="ml-3 relative"
                     >
                         <div>
@@ -109,12 +93,17 @@
 </template>
 
 <script>
+import sidebar from './sidebar'
+import searchBar from './searchBar'
+
 export default {
+    components: {sidebar, searchBar},
     props: {
         noNavbar: Boolean,
         hasSearch: Boolean,
         searchEndpoint: String,
         noNotification: Boolean,
+        hideProfileDropdown: Boolean,
         logo: String
     },
     data() {

@@ -48,7 +48,7 @@ export default {
             this.value = {}
             this.value.name = value.slug
 
-            axios.post(route('cms.menus.getOptions', value.slug))
+            axios.get(route('cms.menus.getOptions', value.slug))
                 .then((response) => {
                     this.optionOptions = response.data.data
                 })
@@ -64,7 +64,6 @@ export default {
         assignContent() {
             if (this.value) {
                 this.type = this.schema.types.find((type) => {
-                    console.log(type.slug == this.value.name, type.slug, this.value.name);
                     return type.slug == this.value.name
                 })
 

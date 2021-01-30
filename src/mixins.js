@@ -16,7 +16,7 @@ Vue.mixin({
         _() {
             return _;
         },
-        $logs() {
+        $log() {
             return console.log;
         },
         $document() {
@@ -123,7 +123,6 @@ Vue.mixin({
         },
         vueMultiselectCustomLabelByCollections(collections, key = "name", pluck = "id") {
             return opt => {
-            console.log(this)
                 let result = collections.find(function(item) {
                     return item[pluck] == opt;
                 });

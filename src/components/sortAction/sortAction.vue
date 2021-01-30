@@ -22,7 +22,7 @@
             Sort
         </button>
 
-        <input type="hidden" name="sort" v-model="sortChecked" />
+        <input type="hidden" name="sort" v-model="sortChecked"/>
 
         <transition
             name="modal"

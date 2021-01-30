@@ -1,9 +1,10 @@
 <template>
     <span @click="$emit('click')" :class="`inline-flex rounded-md shadow-sm ${theme}`">
-        <component :is="$attrs.href ? 'a' : 'button'"
+        <component :is="component"
             v-bind="$attrs"
             class="inline-flex items-center border text-xs font-medium rounded focus:outline-none transition ease-in-out duration-150"
-            :class="[ sizes[size], generatedTheme ]"
+            :class="[ sizes[size], generatedTheme, isDisabled ? 'disabled:opacity-50' : '' ]"
+            :disabled="isDisabled"
         >
             <slot></slot>
         </component>
@@ -14,6 +15,10 @@
 export default {
     inheritAttrs: false,
     props: {
+        component: {
+            type: String,
+            default: 'button'
+        },
         size: {
             type: String,
             default: 'xs'
@@ -25,6 +30,10 @@ export default {
         color: {
             type: String,
             default: 'indigo'
+        },
+        isDisabled: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
