@@ -32,8 +32,8 @@
   "dependencies": {
     "@stripe/stripe-js": "^1.5.0",
     "@tinymce/tinymce-vue": "^3.2.1",
-    "@vue-hero-icons/outline": "1.2.0",
-    "@vue-hero-icons/solid": "1.2.0",
+    "@vue-hero-icons/outline": "1.6.2",
+    "@vue-hero-icons/solid": "1.6.2",
     "aos": "^2.3.4",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.12.0",

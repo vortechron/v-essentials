@@ -2,7 +2,14 @@
     <transition
         leave-active-class="duration-500 sm:duration-700"
     >
-    <div v-show="isShow" class="fixed inset-0 overflow-hidden z-10 slide-over">
+    <div 
+        @keydown.enter.prevent="($event) => {
+            $refs.ok.click()
+            $emit('ok')
+        }" 
+        v-show="isShow" 
+        class="fixed inset-0 overflow-hidden z-10 slide-over"
+    >
         <div class="absolute inset-0 overflow-hidden">
             <section class="absolute inset-y-0 pl-0 sm:pl-16 max-w-full right-0 flex">
                 <transition
@@ -89,6 +96,7 @@
                                 </span>
                                 <span class="inline-flex rounded-md shadow-sm ok">
                                     <button
+                                        ref="ok"
                                         @click.prevent="$emit('ok')"
                                         type="submit"
                                         class="inline-flex justify-center py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
