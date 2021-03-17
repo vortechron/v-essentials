@@ -21,7 +21,7 @@
                 <div class="p-4">
                     <div class="flex items-start">
                         <div class="flex-shrink-0" v-if="icon">
-                            <heroicon :name="icon" class="h-6 w-6" :class="iconClasses"></heroicon>
+                            <hero-icon :name="icon" class="h-6 w-6" :class="iconClasses"></hero-icon>
                         </div>
                         <div class="ml-3 w-0 flex-1 pt-0.5">
                             <p

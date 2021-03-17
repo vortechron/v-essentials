@@ -27,6 +27,7 @@
 		:selected-label="selectOptions.selectedLabel"
 		:deselect-label="selectOptions.deselectLabel"
 		:show-labels="selectOptions.showLabels"
+		:show-no-results="selectOptions.showNoResults"
 		:limit="selectOptions.limit"
 		:limit-text="selectOptions.limitText"
 		:loading="isLoading"
@@ -41,6 +42,7 @@
 		@open="onOpen"
 		@close="onClose"
 		:option-height="selectOptions.optionHeight"
+		:preserve-search="selectOptions.preserveSearch"
 	>
         <span slot="noResult">
 			{{ selectOptions.noResult }}
@@ -48,6 +50,9 @@
         <span slot="maxElements">
 			{{ selectOptions.maxElements }}
         </span>
+		<template v-if="selectOptions.optionSlot" slot="option" slot-scope="props">
+			<component :is="selectOptions.optionSlot" v-bind="props"></component>
+		</template>
 	</multiselect>
 
         <input type="hidden" :name="schema.inputName" v-model="value" v-if="schema.inputName">
@@ -88,20 +93,15 @@ export default {
 			})
 		},
 		addTag(newTag, id) {
-			let onNewTag = this.selectOptions.onNewTag.bind(this);
+			let onNewTag = this.selectOptions.onNewTag
 			if (typeof onNewTag == "function") {
-				onNewTag(newTag, id, this.options, this.value);
+				onNewTag.call(this, newTag, id, this.options, this.value)
 			}
 		},
 		onSearchChange(searchQuery, id) {
-			let onSearch = this.selectOptions.onSearch;
-			if (typeof onSearch == "function") {
-				this.isLoading = true;
-				onSearch(searchQuery, this.model).then(response => {
-					console.log(response);
-					this.options = response;
-					this.isLoading = false;
-				});
+			let onSearchChange = this.selectOptions.onSearchChange
+			if (typeof onSearchChange == "function") {
+				onSearchChange.call(this, searchQuery, this.options)
 			}
 		},
 		onSelect(/* selectedOption, id */) {

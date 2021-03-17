@@ -2,11 +2,7 @@
     <td class="pr-6">
         <div class="relative flex justify-end items-center">
             <button
-                v-click-outside="
-                () => {
-                    showDropdown = false;
-                }
-                "
+                v-click-outside="() => { showDropdown = false }"
                 @click="showDropdown = !showDropdown"
                 id="project-options-menu-0"
                 aria-has-popup="true"

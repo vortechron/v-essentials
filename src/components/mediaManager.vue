@@ -179,7 +179,6 @@ export default {
     computed: {
         mediaOnSelect() {
             if (this.selectedTabIndex == 2) {
-                console.log('test');
                 return this.igMedia[this.selectedIndex]
             }
 

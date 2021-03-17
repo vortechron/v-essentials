@@ -10,10 +10,11 @@
               <tr v-for="(m, index) in media" :key="m.id" class=" bg-white">
                 <td class="px-6 py-4 whitespace-nowrap border-b border-gray-200">
                   <div class="flex items-center">
-                    <div class="flex-shrink-0 h-10 w-10">
+                    <div class="flex-shrink-0 h-10 w-10 inline-flex items-center justify-center rounded bg-gray-200">
                       <img
+                        @click="$window.open(m.full_url)"
                         v-if="isImage(m.mime_type)"
-                        class="h-10 w-10 rounded"
+                        class="w-10 max-h-full max-w-full"
                         :src="m.full_url"
                         alt
                       />

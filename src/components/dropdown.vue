@@ -9,9 +9,9 @@
         leave-to-class="transform opacity-0 scale-95"
     >
         <div
+            v-bind="$attrs"
             v-show="isShow"
-            class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
-            style="display: none;"
+            class="origin-top-right absolute w-48 rounded-md shadow-lg"
         >
             <div
                 class="py-1 rounded-md bg-white ring-1 ring-black ring-opacity-5"
@@ -27,9 +27,10 @@
 
 <script>
 export default {
+    inheritAttrs: false,
     props: {
         isShow: Boolean
-    }
+    },
 };
 </script>
 

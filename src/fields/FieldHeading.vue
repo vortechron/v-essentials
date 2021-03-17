@@ -6,12 +6,9 @@
 </template>
 
 <script>
-   import { abstractField } from "vue-form-generator";
+    import { abstractField } from "vue-form-generator";
 
-   export default {
-         mixins: [ abstractField ],
-         mounted() {
-             console.log('testset');
-         }
-   };
+    export default {
+        mixins: [ abstractField ]
+    };
 </script>

@@ -29,7 +29,6 @@ export default {
   },
   methods: {
     optionClicked(option) {
-      console.log(option);
       this.value = option.value
     }
   }

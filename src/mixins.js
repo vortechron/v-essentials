@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import VFG from './classes/vfg'
 
 Vue.mixin({
     components: {
@@ -13,6 +14,9 @@ Vue.mixin({
         };
     },
     computed: {
+        $vfg() {
+            return VFG
+        },
         _() {
             return _;
         },
@@ -37,28 +41,6 @@ Vue.mixin({
     methods: {
         uniqueId() {
             return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        },
-        validateAndSubmit(vfgs, form) {
-            let statusError = false;
-            vfgs.forEach((vfg) => {
-                let name = vfg.$options.name || vfg.$options._componentTag
-                if (name == 'vfg') vfg = vfg.vfg() 
-
-                vfg.validate()
-                if (vfg.errors.length != 0) statusError = true;
-            })
-
-            if (! statusError) {
-                if (typeof form === "function") form() 
-                else form.submit()
-            } else {
-                setTimeout(() => {
-                    $('html, body').animate({
-                        scrollTop: $('.error').offset().top - 200
-                    }, 500);
-                }, 500)
-            }
-
         },
         getMeta(metaName) {
             const metas = document.getElementsByTagName("meta");
@@ -136,15 +118,7 @@ Vue.mixin({
             const k = 1024;
             const dm = decimals < 0 ? 0 : decimals;
             const sizes = [
-                "Bytes",
-                "KB",
-                "MB",
-                "GB",
-                "TB",
-                "PB",
-                "EB",
-                "ZB",
-                "YB"
+                "Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"
             ];
 
             const i = Math.floor(Math.log(bytes) / Math.log(k));

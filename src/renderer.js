@@ -1,4 +1,5 @@
-import VueWithCompiler from "vue/dist/vue.esm";
+import Vue from 'vue'
+
 export default {
 	props: {
 		html: {
@@ -10,18 +11,17 @@ export default {
 		return { templateRender: undefined };
 	},
 	watch: {
-		html(to) {
+		handler: (to) => {
 			this.updateRender();
 		},
-	},
-	created() {
-		this.updateRender();
+		immediate: true
 	},
 	methods: {
 		updateRender() {
-			const compiled = VueWithCompiler.compile(this.html);
+			const compiled = Vue.compile(this.html);
 			this.templateRender = compiled.render;
 			this.$options.staticRenderFns = [];
+
 			for (const staticRenderFunction of compiled.staticRenderFns) {
 				this.$options.staticRenderFns.push(staticRenderFunction);
 			}

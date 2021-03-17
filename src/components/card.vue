@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white shadow-md rounded-sm">
+    <div class="shadow-md rounded-sm">
         <div class="bg-white px-4 py-3 border-b border-gray-200 sm:px-6" v-if="title || hasSlot('title')">
             <div
                 class="-ml-4 -mt-4 flex justify-between items-center flex-wrap sm:flex-nowrap"
@@ -19,7 +19,7 @@
                     <slot name="action">
                         <btn
                             v-if="actionLabel"
-                            size="md"
+                            :size="actionSize || 'sm'"
                             :color="actionColor"
                             @click="$emit('action')"
                             :href="actionUrl"
@@ -43,7 +43,10 @@
 </template>
 
 <script>
+import btn from './btn';
+
 export default {
+    components: {btn},
     props: {
         title: String,
         subtitle: String,

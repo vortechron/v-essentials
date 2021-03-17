@@ -2,8 +2,8 @@
     <span @click="$emit('click')" :class="`inline-flex rounded-md shadow-sm ${theme}`">
         <component :is="component"
             v-bind="$attrs"
-            class="inline-flex items-center border text-xs font-medium rounded focus:outline-none transition ease-in-out duration-150"
-            :class="[ sizes[size], generatedTheme, isDisabled ? 'disabled:opacity-50' : '' ]"
+            :class="[ sizes[size], generatedTheme, isDisabled ? 'disabled:opacity-50' : '',  btnClass ]"
+            class="inline-flex items-center border text-xs font-medium focus:outline-none transition ease-in-out duration-150 focus:ring-1 focus:z-10"
             :disabled="isDisabled"
         >
             <slot></slot>
@@ -34,6 +34,10 @@ export default {
         isDisabled: {
             type: Boolean,
             default: false
+        },
+        btnClass: {
+            type: String,
+            default: 'rounded'
         }
     },
     data() {
@@ -51,7 +55,7 @@ export default {
                     "bg-{{color}}-600",
                     "hover:bg-{{color}}-500",
                     "focus:border-{{color}}-700",
-                    "focus:ring-{{color}}",
+                    "focus:ring-{{color}}-500",
                     "active:bg-{{color}}-700"
                 ],
                 secondary: [
@@ -60,7 +64,7 @@ export default {
                     "bg-{{color}}-100",
                     "hover:bg-{{color}}-50",
                     "focus:border-{{color}}-300",
-                    "focus:ring-{{color}}",
+                    "focus:ring-{{color}}-50",
                     "active:bg-{{color}}-200"
                 ],
                 white: [

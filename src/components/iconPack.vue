@@ -1,14 +1,14 @@
 <template>
-    <heroicon v-if="isHeroicon" outline :name="name"></heroicon>
+    <hero-icon v-if="isHeroicon" outline :name="name"></hero-icon>
     <md-icon v-else :name="name"></md-icon>
 </template>
 
 <script>
-import heroicon from './heroicon'
+import heroIcon from './heroIcon'
 import mdIcon from './mdIcon'
 
 export default {
-    components: {heroicon, mdIcon},
+    components: {heroIcon, mdIcon},
     props: {
         isHeroicon: Boolean,
         name: String
