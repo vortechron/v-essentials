@@ -11,10 +11,12 @@ export default {
 		return { templateRender: undefined };
 	},
 	watch: {
-		handler: (to) => {
-			this.updateRender();
-		},
-		immediate: true
+		html: {
+			handler() {
+				this.updateRender()
+			},
+			immediate: true
+		}
 	},
 	methods: {
 		updateRender() {
